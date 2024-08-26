@@ -37,10 +37,12 @@ server.listen(7000,() => {
     if(MongDB_URL === process.env.MONGODB_LOCAL)
         console.log("MongoDB is running at localhost")
     else console.log("MongoDB is running at Atlas")
-})
+});
 
-mongoose.Promise = Promise
-mongoose.connect(MongDB_URL)
-mongoose.connection.on('error', (error: Error) => console.log(error))
+mongoose.Promise = Promise;
+mongoose.connect(MongDB_URL);
+mongoose.connection.on('error', (error: Error) => console.log(error));
 
 // app.use('/kalinga', router());
+
+export default app;
