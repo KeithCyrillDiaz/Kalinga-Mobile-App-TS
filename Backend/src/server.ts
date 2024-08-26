@@ -34,7 +34,7 @@ if (!MongDB_URL) {
 
 server.listen(7000,() => {
     console.log("Server Running on http://localhost:7000/")
-    if(MongDB_URL === process.env.MONGODB_LOCAL)
+    if(MongDB_URL === process.env.MONGO_DB_ATLAS_URL)
         console.log("MongoDB is running at localhost")
     else console.log("MongoDB is running at Atlas")
 });
