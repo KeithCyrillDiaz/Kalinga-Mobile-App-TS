@@ -1,5 +1,5 @@
 import { StatusBar } from "./statusBar";
-import { Onboarding } from "./onBoarding";
+import { Onboarding } from "./onBoardingComponents";
 import { LogInBody, LogInHeader, LogInFooter } from "./logInComponenets";
 
 

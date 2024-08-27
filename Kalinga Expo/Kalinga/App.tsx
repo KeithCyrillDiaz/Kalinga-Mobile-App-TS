@@ -6,8 +6,16 @@ import { getFonts } from '@/functions';
 
 import {
   SplashScreen,
-  LogInPage
+  LogInPage,
+  OnBoardingPage
 } from '@/Pages'
+
+
+export type RootStackParams = {
+  SplashScreen: undefined;
+  LogInPage: undefined;
+  OnBoardingPage: undefined;
+}
 
 const Stack = createStackNavigator()
 
@@ -25,18 +33,16 @@ export default function App() {
   if(fontsLoaded)
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='SplashScreen' screenOptions={{headerShown:false}}>
+      <Stack.Navigator initialRouteName='OnBoardingPage' screenOptions={{headerShown:false}}>
         <Stack.Screen name='SplashScreen' component={SplashScreen}/>
+        <Stack.Screen name='OnBoardingPage' component={OnBoardingPage}/>
         <Stack.Screen name='LogInPage' component={LogInPage}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-export type RootStackParams = {
-  SplashScreen: undefined
-  LogInPage: undefined
-}
 
 
 const styles = StyleSheet.create({
