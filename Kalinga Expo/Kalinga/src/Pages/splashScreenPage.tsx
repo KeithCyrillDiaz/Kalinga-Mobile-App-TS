@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParams } from '@@/App';
-import { ResetPage } from '@/functions/resetPage';
+import { ResetPage } from '@/functions';
 
 export default function SplashScreenPage () {
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
