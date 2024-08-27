@@ -1,8 +1,13 @@
 import React, {useRef, useState} from 'react'
 import { Text, View, StyleSheet, FlatList, Image, ImageSourcePropType, Dimensions, Animated, ViewToken, TouchableOpacity,} from "react-native";
 import { WelcomePageRequestData } from "@/data/devData";
+import { ResetPage } from '@/functions';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParams } from '@@/App';
+import { useNavigation } from '@react-navigation/native';
 
 const {height, width} = Dimensions.get("screen")
+
 export const Onboarding: React.FC = () => {
 
     return(
@@ -31,6 +36,7 @@ interface OnBoardingItemProps {
 }
 
 export const OnBoardingItem: React.FC<OnBoardingItemProps> = ({data}) => {
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     return(
         <View style={{width:width}}>
              <Image
@@ -48,6 +54,7 @@ export const OnBoardingItem: React.FC<OnBoardingItemProps> = ({data}) => {
                     {data.id === "4" && (
                         <TouchableOpacity
                          style= {onBoardingItemStyles.button}
+                         onPress={() => ResetPage(navigation, "LogInPage")}
                          >
                            <Text
                              style={{
