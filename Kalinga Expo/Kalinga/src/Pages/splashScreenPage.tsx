@@ -5,13 +5,13 @@ import { useEffect } from 'react'
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParams } from '@@/App';
-import { ResetPage } from '@/functions';
+import { resetPage } from '@/functions';
 
 export default function SplashScreenPage () {
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     useEffect(()=>{
         const timer = setTimeout(()=> {
-           ResetPage(navigation, "LogInPage")
+           resetPage(navigation, "OnBoardingPage")
         },2000)
 
         return () => clearTimeout(timer);

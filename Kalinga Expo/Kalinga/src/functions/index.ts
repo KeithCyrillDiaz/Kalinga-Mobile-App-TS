@@ -1,8 +1,8 @@
 import { getFonts } from "./getFonts";
-import { ResetPage } from './pageNavigation'
+import { resetPage, navigatePage } from './pageNavigation'
 
 export {
     getFonts,
-    ResetPage
-
+    resetPage,
+    navigatePage
 }

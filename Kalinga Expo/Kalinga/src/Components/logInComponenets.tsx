@@ -1,5 +1,8 @@
+import { navigatePage, resetPage } from "@/functions";
 import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity, TextInput } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "@@/App";
 
 const {height, width} = Dimensions.get("screen")
 
@@ -38,7 +41,11 @@ export const LogInHeader: React.FC = () => {
     )
 }
 
-export const LogInBody: React.FC = () => {
+interface LogInBodyProps {
+    navigation: StackNavigationProp<RootStackParams>
+}
+
+export const LogInBody: React.FC<LogInBodyProps> = ({navigation}) => {
     return(
         <View
         style ={{
@@ -104,6 +111,7 @@ export const LogInBody: React.FC = () => {
             paddingVertical: 7,
             borderRadius: 17,
             marginVertical: 10
+            
         }}>
             <Text
             style = {{ 
@@ -113,7 +121,9 @@ export const LogInBody: React.FC = () => {
             }}
             > Log In</Text>
         </TouchableOpacity>
-        <TouchableOpacity style ={{
+        <TouchableOpacity 
+        onPress={() => resetPage(navigation, "GuestHomePage")}
+        style ={{
             width: width * .40,
             alignSelf: "center",
             alignItems: "center",

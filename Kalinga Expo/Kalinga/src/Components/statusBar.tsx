@@ -9,7 +9,7 @@ interface Props {
 
 const { height } = Dimensions.get('window');
 
-export const StatusBar: React.FC<Props> = ({title, name, home = false}) => {
+export const KalingaStatusBar: React.FC<Props> = ({title, name, home = false}) => {
     return(
         <View style={[styles.container,
                 {

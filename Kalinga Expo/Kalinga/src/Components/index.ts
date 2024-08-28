@@ -1,12 +1,16 @@
-import { StatusBar } from "./statusBar";
+import { KalingaStatusBar } from "./statusBar";
 import { Onboarding } from "./onBoardingComponents";
 import { LogInBody, LogInHeader, LogInFooter } from "./logInComponenets";
+import { GuestHomePageComponents } from "./Guest/HomePageComponents";
+import { MenuButtonCard } from "./Buttons";
 
 
 export {
-    StatusBar,
+    KalingaStatusBar,
     Onboarding,
     LogInBody,
     LogInHeader,
-    LogInFooter
+    LogInFooter,
+    GuestHomePageComponents,
+    MenuButtonCard
 }
