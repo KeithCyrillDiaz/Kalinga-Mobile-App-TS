@@ -1,8 +1,15 @@
 import { Text, View, StyleSheet } from "react-native";
 import { MenuButtonCard } from "../Buttons";
+import { RootStackParams } from "@@/App";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 
-export const GuestHomePageComponents: React.FC = () => {
+
+interface Props {
+    navigation: StackNavigationProp<RootStackParams>
+}
+
+export const GuestHomePageComponents: React.FC<Props> = ({navigation}) => {
     return(
         <View style={styles.container}>
             <View
@@ -14,6 +21,9 @@ export const GuestHomePageComponents: React.FC = () => {
             }}
             >
                 <MenuButtonCard 
+                navigation={navigation}
+                navigateTo="DataPrivacyPage"
+                params={{userType: "Donor"}}
                 iconFamily="FontAwesome5"
                 buttonName="hand-holding-water" 
                 title="Apply as Requestor"
@@ -22,6 +32,8 @@ export const GuestHomePageComponents: React.FC = () => {
                 iconSize={60}
                 />
                  <MenuButtonCard 
+                navigation={navigation}
+                navigateTo="DataPrivacyPage"
                 iconFamily="FontAwesome"
                 buttonName="handshake-o" 
                 title="Apply as Donor"
@@ -39,7 +51,9 @@ export const GuestHomePageComponents: React.FC = () => {
                 gap: 17
             }}
             >
-                <MenuButtonCard 
+                <MenuButtonCard
+                navigation={navigation}
+                navigateTo="DataPrivacyPage"
                 iconFamily="MaterialIcons"
                 buttonName="location-on" 
                 title="Apply as Requestor"

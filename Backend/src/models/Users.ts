@@ -27,7 +27,7 @@ const DonorSchema = new mongoose.Schema({
     Community_ID: [{ type: String }],
     Post_ID: [{ type: String }],
     BookMark_ID: [{ type: String }],
-    userType: {type: String},
+    userType: {type: String, required: true},
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
 })
@@ -62,7 +62,7 @@ const RequestorSchema = new mongoose.Schema({
     Community_ID: [{ type: String }],
     Post_ID: [{ type: String }],
     BookMark_ID: [{ type: String }],
-    userType: {type: String},
+    userType: {type: String, required: true},
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now},
 });

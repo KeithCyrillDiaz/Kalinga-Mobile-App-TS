@@ -12,6 +12,11 @@ export const resetPage = (navigation: StackNavigationProp<RootStackParams>, page
     )
 }
 
-export const navigatePage = (navigation: StackNavigationProp<RootStackParams>, page: keyof RootStackParams) => {
-    navigation.navigate(page)
+export const navigatePage = (
+    navigation: StackNavigationProp<RootStackParams>, 
+    page: keyof RootStackParams, 
+    parameter?: any
+     
+) => {
+    navigation.navigate(page, parameter)
 }

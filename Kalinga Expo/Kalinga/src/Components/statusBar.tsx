@@ -3,7 +3,7 @@ import { message } from "@/data/devData";
 
 interface Props {
     title: String,
-    name: String,
+    name?: String,
     home: boolean
 }
 

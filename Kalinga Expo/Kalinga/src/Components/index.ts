@@ -12,5 +12,5 @@ export {
     LogInHeader,
     LogInFooter,
     GuestHomePageComponents,
-    MenuButtonCard
+    MenuButtonCard,
 }

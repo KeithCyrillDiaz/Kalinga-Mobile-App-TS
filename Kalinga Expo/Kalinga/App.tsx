@@ -8,7 +8,8 @@ import {
   SplashScreen,
   LogInPage,
   OnBoardingPage,
-  GuestHomePage
+  GuestHomePage,
+  DataPrivacyPage
 } from '@/Pages'
 
 
@@ -16,10 +17,11 @@ export type RootStackParams = {
   SplashScreen: undefined;
   LogInPage: undefined;
   OnBoardingPage: undefined;
-  GuestHomePage: undefined
+  GuestHomePage: undefined;
+  DataPrivacyPage: {userType: string};
 }
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator<RootStackParams>()
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState<boolean>(false)
@@ -40,6 +42,9 @@ export default function App() {
         <Stack.Screen name='OnBoardingPage' component={OnBoardingPage}/>
         <Stack.Screen name='LogInPage' component={LogInPage}/>
         <Stack.Screen name='GuestHomePage' component={GuestHomePage}/>
+        <Stack.Screen name='DataPrivacyPage' component={DataPrivacyPage}/>
+
+
 
       </Stack.Navigator>
     </NavigationContainer>
