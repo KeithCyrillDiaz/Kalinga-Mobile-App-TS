@@ -2,6 +2,9 @@ import { TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "@@/App";
+import { navigatePage } from "@/functions";
 
 const {width, height } = Dimensions.get("screen")
 interface MenuButtonCardProp {
@@ -11,6 +14,10 @@ interface MenuButtonCardProp {
     iconSize: number;
     color: string
     iconFamily: 'FontAwesome5' | 'FontAwesome' | 'MaterialIcons';
+    navigateTo: keyof RootStackParams
+    navigation: StackNavigationProp<RootStackParams>
+    params?: RootStackParams[keyof RootStackParams]
+
 }
 
 export const MenuButtonCard: React.FC<MenuButtonCardProp> = ({
@@ -19,7 +26,10 @@ export const MenuButtonCard: React.FC<MenuButtonCardProp> = ({
     subTitle,
     iconSize,
     color,
-    iconFamily
+    iconFamily,
+    navigateTo,
+    navigation,
+    params
 }) => {
     
     const IconComponent = {
@@ -30,6 +40,7 @@ export const MenuButtonCard: React.FC<MenuButtonCardProp> = ({
 
     return(
         <TouchableOpacity
+        onPress={() => navigatePage(navigation, navigateTo, params)}
         style = {{
             backgroundColor:"white",
             alignItems: "center",
