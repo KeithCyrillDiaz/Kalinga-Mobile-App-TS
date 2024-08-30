@@ -15,8 +15,8 @@ export const resetPage = (navigation: StackNavigationProp<RootStackParams>, page
 export const navigatePage = (
     navigation: StackNavigationProp<RootStackParams>, 
     page: keyof RootStackParams, 
-    parameter?: any
+    params?: any
      
 ) => {
-    navigation.navigate(page, parameter)
+    navigation.navigate(page, params)
 }

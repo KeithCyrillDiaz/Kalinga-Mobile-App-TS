@@ -7,7 +7,6 @@ type Props = StackScreenProps<RootStackParams, 'DataPrivacyPage'>
 
 export default function DataPrivacyPage ({route} : Props) {
     const {userType} = route.params
-    console.log("userType: ", userType)
     return(
         <SafeAreaView style={{
             backgroundColor: "#f5f5f5"

@@ -7,14 +7,16 @@ interface Props {
     home: boolean
 }
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 export const KalingaStatusBar: React.FC<Props> = ({title, name, home = false}) => {
     return(
         <View style={[styles.container,
                 {
                     height: !home ? height * 0.1 : height * 0.2,
-                    paddingTop: !home ? 10 : 0,
+                    position: "absolute",
+                    zIndex: 1,
+                    width: width
                 }
             ]}>
             {!home
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
     text: {
         color: "white",
         fontFamily: "Kurale",
-        fontSize: 17,
+        fontSize: 20,
         alignSelf: "center"
     },
     title: {
