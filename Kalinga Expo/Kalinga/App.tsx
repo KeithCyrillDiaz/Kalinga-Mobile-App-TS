@@ -9,7 +9,8 @@ import {
   LogInPage,
   OnBoardingPage,
   GuestHomePage,
-  DataPrivacyPage
+  DataPrivacyPage,
+  MilkBankLocatorPage
 } from '@/Pages'
 
 
@@ -19,6 +20,7 @@ export type RootStackParams = {
   OnBoardingPage: undefined;
   GuestHomePage: undefined;
   DataPrivacyPage: {userType: string};
+  MilkBankLocatorPage: undefined
 }
 
 const Stack = createStackNavigator<RootStackParams>()
@@ -43,6 +45,8 @@ export default function App() {
         <Stack.Screen name='LogInPage' component={LogInPage}/>
         <Stack.Screen name='GuestHomePage' component={GuestHomePage}/>
         <Stack.Screen name='DataPrivacyPage' component={DataPrivacyPage}/>
+        <Stack.Screen name='MilkBankLocatorPage' component={MilkBankLocatorPage}/>
+
 
 
 

@@ -23,7 +23,7 @@ export const GuestHomePageComponents: React.FC<Props> = ({navigation}) => {
                 <MenuButtonCard 
                 navigation={navigation}
                 navigateTo="DataPrivacyPage"
-                params={{userType: "Donor"}}
+                params={{userType: "Requestor"}}
                 iconFamily="FontAwesome5"
                 buttonName="hand-holding-water" 
                 title="Apply as Requestor"
@@ -34,6 +34,7 @@ export const GuestHomePageComponents: React.FC<Props> = ({navigation}) => {
                  <MenuButtonCard 
                 navigation={navigation}
                 navigateTo="DataPrivacyPage"
+                params={{userType: "Donor"}}
                 iconFamily="FontAwesome"
                 buttonName="handshake-o" 
                 title="Apply as Donor"
@@ -53,10 +54,10 @@ export const GuestHomePageComponents: React.FC<Props> = ({navigation}) => {
             >
                 <MenuButtonCard
                 navigation={navigation}
-                navigateTo="DataPrivacyPage"
+                navigateTo="MilkBankLocatorPage"
                 iconFamily="MaterialIcons"
                 buttonName="location-on" 
-                title="Apply as Requestor"
+                title="Milk Bank Locator"
                 subTitle="Easily find human milk banks near you"
                 color="#E60965"
                 iconSize={60}
