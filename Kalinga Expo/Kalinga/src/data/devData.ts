@@ -33,7 +33,6 @@ export const WelcomePageRequestData = [
 
 
   export const dataPrivacyActText = `
-
 At Kalinga Breast Milk Application, we are very committed to protecting the privacy and security of your personal information. This Data Privacy Policy outlines how we collect, use, disclose, and protect the personal information of our breast milk donors.
 
 1. Information We Collect:
@@ -58,5 +57,4 @@ Breast milk donors maintain certain rights regarding their personal information.
 For any inquiries, concerns, or requests concerning our Data Privacy Policy or the handling of personal information, individuals are encouraged to contact us using the provided contact information.
 
 8. Changes to this Policy:
-We reserve the right to update or modify this Data Privacy Policy as needed. Any revisions will be promptly communicated and reflected on our website along with the updated effective date.
-`
+We reserve the right to update or modify this Data Privacy Policy as needed. Any revisions will be promptly communicated and reflected on our website along with the updated effective date.`

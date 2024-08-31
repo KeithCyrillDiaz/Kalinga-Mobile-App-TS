@@ -1,9 +1,11 @@
 import LogInPage from './logInPage'
 import SplashScreen from './splashScreenPage'
 import OnBoardingPage from './OnBoarding'
-import GuestHomePage from './Guest/HomePage'
+import GuestHomePage from './Guest/GuestHomePage'
 import DataPrivacyPage from './DataPrivacyPage'
 import MilkBankLocatorPage from './MilkBankLocatorPage'
+import ApplyAsRequestorPage from './Guest/ApplyAsRequestorPage'
+import ApplyAsDonorPage from './Guest/ApplyAsDonorPage'
 
 export {
     SplashScreen,
@@ -11,7 +13,9 @@ export {
     OnBoardingPage,
     GuestHomePage,
     DataPrivacyPage,
-    MilkBankLocatorPage
+    MilkBankLocatorPage,
+    ApplyAsRequestorPage,
+    ApplyAsDonorPage
 }
 
 
