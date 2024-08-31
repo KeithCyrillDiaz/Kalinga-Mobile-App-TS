@@ -50,7 +50,7 @@ export const OnBoardingItem: React.FC<OnBoardingItemProps> = ({data}) => {
                 <View style={onBoardingItemStyles.overlay}>
                     <Text style= {onBoardingItemStyles.title}>{data.title}</Text>
                     <Text style={onBoardingItemStyles.description}>{data.description}</Text>
-                    <PageIndicator id={data.id}/>
+                    <PageIndicatorOnboarding id={data.id}/>
                     {data.id === "4" && (
                         <TouchableOpacity
                          style= {onBoardingItemStyles.button}
@@ -108,7 +108,7 @@ const onBoardingItemStyles = StyleSheet.create({
 interface PageIndicatorProps {
     id: String
 }
-export const PageIndicator: React.FC<PageIndicatorProps> = ({id}) => {
+export const PageIndicatorOnboarding: React.FC<PageIndicatorProps> = ({id}) => {
 
     return(
         <View
