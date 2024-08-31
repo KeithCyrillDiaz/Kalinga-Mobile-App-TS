@@ -10,7 +10,9 @@ import {
   OnBoardingPage,
   GuestHomePage,
   DataPrivacyPage,
-  MilkBankLocatorPage
+  MilkBankLocatorPage,
+  ApplyAsRequestorPage,
+  ApplyAsDonorPage
 } from '@/Pages'
 
 
@@ -20,7 +22,9 @@ export type RootStackParams = {
   OnBoardingPage: undefined;
   GuestHomePage: undefined;
   DataPrivacyPage: {userType: string};
-  MilkBankLocatorPage: undefined
+  MilkBankLocatorPage: undefined;
+  ApplyAsRequestorPage: {userType: string};
+  ApplyAsDonorPage: {userType: string}
 }
 
 const Stack = createStackNavigator<RootStackParams>()
@@ -46,6 +50,9 @@ export default function App() {
         <Stack.Screen name='GuestHomePage' component={GuestHomePage}/>
         <Stack.Screen name='DataPrivacyPage' component={DataPrivacyPage}/>
         <Stack.Screen name='MilkBankLocatorPage' component={MilkBankLocatorPage}/>
+        <Stack.Screen name='ApplyAsRequestorPage' component={ApplyAsRequestorPage}/>
+        <Stack.Screen name='ApplyAsDonorPage' component={ApplyAsDonorPage}/>
+        
 
 
 

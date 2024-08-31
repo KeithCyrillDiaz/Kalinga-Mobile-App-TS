@@ -76,3 +76,49 @@ export const MenuButtonCard: React.FC<MenuButtonCardProp> = ({
         </TouchableOpacity>
     )
 }
+
+interface CustomButtonProps {
+    text: string
+    disabled?: boolean 
+    navigation: StackNavigationProp<RootStackParams> 
+    navigateTo: keyof RootStackParams
+    params?: any
+    color: string
+    textColor: string
+    elevation?: number
+}
+
+export const CustomButton: React.FC<CustomButtonProps> = ({
+    text, 
+    textColor, 
+    disabled, 
+    navigation, 
+    navigateTo, 
+    params, 
+    color,
+    elevation
+}) => {
+    return(
+        <TouchableOpacity
+        disabled={disabled ?? false}
+        onPress={() => navigatePage(navigation, navigateTo, params)}
+        style={{
+            alignSelf: "center",
+            padding: 10,
+            backgroundColor: color,
+            alignItems:"center",
+            justifyContent: "center",
+            width: width * .25,
+            borderRadius: 7,
+            elevation: elevation
+        }}
+        >
+            <Text
+            style={{
+                color: textColor
+            }}
+            
+            >{text}</Text>
+        </TouchableOpacity>
+    )
+}
