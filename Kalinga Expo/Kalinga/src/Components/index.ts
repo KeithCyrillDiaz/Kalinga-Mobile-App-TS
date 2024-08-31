@@ -5,6 +5,7 @@ import { GuestHomePageComponents } from "./Guest/HomePageComponents";
 import { MenuButtonCard, CustomButton } from "./Buttons";
 import { MapContainer } from "./MilkBankLocatorComponents";
 import { DataPrivacyAct } from "./dataPrivacyComponent";
+import { PageIndicator } from "./PageIndicator";
 
 
 export {
@@ -17,5 +18,6 @@ export {
     MenuButtonCard,
     MapContainer,
     DataPrivacyAct,
-    CustomButton
+    CustomButton,
+    PageIndicator
 }
