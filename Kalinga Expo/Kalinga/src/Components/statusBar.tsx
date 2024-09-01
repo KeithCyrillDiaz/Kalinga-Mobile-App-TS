@@ -1,15 +1,19 @@
 import { Text, View, StyleSheet, Dimensions } from "react-native";
 import { message } from "@/data/devData";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "@@/App";
 
 interface Props {
     title: String,
     name?: String,
-    home: boolean
+    home: boolean,
+    back: keyof RootStackParams
+    navigation: StackNavigationProp<RootStackParams>
 }
 
 const { height, width } = Dimensions.get('window');
 
-export const KalingaStatusBar: React.FC<Props> = ({title, name, home = false}) => {
+export const KalingaStatusBar: React.FC<Props> = ({title, name, home = false, navigation, back}) => {
     return(
         <View style={[styles.container,
                 {

@@ -6,10 +6,10 @@ export default function ApplyAsRequestorPage ({route}: ApplyAsRequestorProps) {
     const {userType} = route.params
     return(
         <>
-            {/* <KalingaStatusBar title = {`Apply as ${userType}`} home = {false}/> */}
+            <KalingaStatusBar title = {`Apply as ${userType}`} home = {false}/>
             <View 
             style={{
-                marginTop: "20%",
+                marginTop: "30%",
             }}
             >
                 <PageIndicator pageNumber={4} currentPageNumber={1}/>
