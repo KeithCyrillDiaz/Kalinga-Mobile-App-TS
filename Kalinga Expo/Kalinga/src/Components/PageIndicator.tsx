@@ -27,6 +27,7 @@ export const PageIndicator: React.FC<PageIndicatorProps> = ({pageNumber, current
         >{
             arrayDummy.map((_, index) => (
             <View
+            key={index}
                 style={{ 
                     borderBottomColor: index === currentPageNumber - 1 ? "#E60965" : "white", 
                     borderBottomWidth: 4,
