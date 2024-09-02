@@ -7,8 +7,8 @@ interface Props {
     title: String,
     name?: String,
     home: boolean,
-    back: keyof RootStackParams
-    navigation: StackNavigationProp<RootStackParams>
+    back?: keyof RootStackParams
+    navigation?: StackNavigationProp<RootStackParams>
 }
 
 const { height, width } = Dimensions.get('window');
