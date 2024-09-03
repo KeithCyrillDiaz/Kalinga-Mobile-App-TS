@@ -6,7 +6,7 @@ import { MenuButtonCard, CustomButton } from "./Buttons";
 import { MapContainer } from "./MilkBankLocatorComponents";
 import { DataPrivacyAct } from "./dataPrivacyComponent";
 import { PageIndicator } from "./PageIndicator";
-
+import { PersonalInformation } from "./Guest/ScreeningFormComponent";
 
 export {
     KalingaStatusBar,
@@ -19,5 +19,6 @@ export {
     MapContainer,
     DataPrivacyAct,
     CustomButton,
-    PageIndicator
+    PageIndicator,
+    PersonalInformation
 }

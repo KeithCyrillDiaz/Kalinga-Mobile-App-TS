@@ -14,7 +14,10 @@ export default function DataPrivacyPage ({route} : DataPrivacyProps) {
         <SafeAreaView style={{
             backgroundColor: "#f5f5f5"
         }}>
-            <KalingaStatusBar title={`Apply as ${userType}`} home={false}/>
+            <KalingaStatusBar title={`Apply as ${userType}`} home={false}
+             navigation={navigation}
+            back="GuestHomePage"
+            />
             <ScrollView>
             <DataPrivacyAct/>
             <View
@@ -33,7 +36,7 @@ export default function DataPrivacyPage ({route} : DataPrivacyProps) {
                 color="#E60965"
                 textColor="white"
                 elevation={17}
-                text="Accept"/>
+                text="Agree"/>
                 
                 {/* Decline button */}
                 <CustomButton 
@@ -42,7 +45,7 @@ export default function DataPrivacyPage ({route} : DataPrivacyProps) {
                 color="white"
                 textColor="#E60965"
                 elevation={17}
-                text="Decline"/>
+                text="Disagree"/>
             </View>
             
             </ScrollView>
