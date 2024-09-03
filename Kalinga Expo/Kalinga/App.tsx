@@ -43,8 +43,8 @@ export default function App() {
   if(fontsLoaded)
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='SplashScreen' screenOptions={{headerShown:false}}>
-        <Stack.Screen name='SplashScreen' component={SplashScreen}/>
+      <Stack.Navigator initialRouteName='GuestHomePage' screenOptions={{headerShown:false}}>
+        <Stack.Screen name='SplashScreen' component={SplashScreen} />
         <Stack.Screen name='OnBoardingPage' component={OnBoardingPage}/>
         <Stack.Screen name='LogInPage' component={LogInPage}/>
         <Stack.Screen name='GuestHomePage' component={GuestHomePage}/>

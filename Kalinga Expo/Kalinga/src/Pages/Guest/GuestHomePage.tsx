@@ -12,7 +12,10 @@ export default function GuestHomePage () {
             barStyle={"light-content"}
             translucent={Platform.OS === 'android' ? false : true}
             />
-            <KalingaStatusBar title="" name = "Rogine" home={true}/>
+            <KalingaStatusBar title="" home={true} 
+            navigation={useNavigation<StackNavigationProp<RootStackParams>>()}
+            back="GuestHomePage"
+            />
             <GuestHomePageComponents navigation={navigation}/>
         </View>
     )
