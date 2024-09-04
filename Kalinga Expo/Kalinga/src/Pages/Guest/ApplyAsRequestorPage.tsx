@@ -45,6 +45,7 @@ export default function ApplyAsRequestorPage ({route}: ApplyAsRequestorProps) {
                 >Initial Screening Form</Text>
                 <PersonalInformation handleChangeText={handleChangeText} form={data}/>
                 <InfantInformation handleChangeText={handleChangeText} form={data}/>
+           
             </ScrollView >
          
         </>
