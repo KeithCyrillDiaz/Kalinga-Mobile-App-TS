@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, View, Dimensions } from "react-native";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -119,6 +119,14 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
             }}
             
             >{text}</Text>
+        </TouchableOpacity>
+    )
+}
+
+export const SubmitButton: React.FC = () => {
+    return(
+        <TouchableOpacity>
+            <Text>Submit</Text>
         </TouchableOpacity>
     )
 }
