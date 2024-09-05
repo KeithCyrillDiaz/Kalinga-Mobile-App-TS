@@ -1,23 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { KalingaStatusBar, PageIndicator, PersonalInformation } from "@/Components";
+import { KalingaStatusBar, PageIndicator, PersonalInformation, InfantInformation } from "@/Components";
 import { ApplyAsRequestorProps } from "@/data/props";
 import { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
 import { RootStackParams } from "@@/App";
 import { useNavigation } from "@react-navigation/native";
-import { InfantInformation } from "@/Components/Guest/ScreeningFormComponent/PersonalInformationComponent";
 import { useScreeningForm } from "@/hooks";
 
 export default function ApplyAsRequestorPage ({route}: ApplyAsRequestorProps) {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     const {userType} = route.params
-    const { data, handleChangeText } = useScreeningForm()
+    const { data, handleUpdateForm} = useScreeningForm({userType: "Requestor"})
  
-    useEffect(()=> {
-        console.log("data: ", data)
-    },)
-
     return(
         <>
             <KalingaStatusBar 
@@ -43,8 +38,9 @@ export default function ApplyAsRequestorPage ({route}: ApplyAsRequestorProps) {
                     fontWeight: "bold"
                 }}
                 >Initial Screening Form</Text>
-                <PersonalInformation handleChangeText={handleChangeText} form={data}/>
-                <InfantInformation handleChangeText={handleChangeText} form={data}/>
+                <PersonalInformation userType='Requestor'
+                />
+                <InfantInformation userType='Requestor'/>
            
             </ScrollView >
          

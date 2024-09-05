@@ -48,7 +48,8 @@ export const MenuButtonCard: React.FC<MenuButtonCardProp> = ({
             width: width*.4,
             padding: "3%",
             borderRadius: 17,
-            elevation: 17
+            elevation: 17,
+            minHeight: 140
         }}
         >
             <IconComponent
