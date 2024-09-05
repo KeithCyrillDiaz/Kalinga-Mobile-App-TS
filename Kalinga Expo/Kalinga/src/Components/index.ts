@@ -6,7 +6,8 @@ import { MenuButtonCard, CustomButton } from "./Buttons";
 import { MapContainer } from "./MilkBankLocatorComponents";
 import { DataPrivacyAct } from "./dataPrivacyComponent";
 import { PageIndicator } from "./PageIndicator";
-import { PersonalInformation } from "./Guest/ScreeningFormComponent";
+import { PersonalInformation, InfantInformation } from "./Guest";
+import { LongTextInput, DoubleTextInput, BirthdayAndAgeComponent } from "./TextInputs";
 
 export {
     KalingaStatusBar,
@@ -20,5 +21,9 @@ export {
     DataPrivacyAct,
     CustomButton,
     PageIndicator,
-    PersonalInformation
+    PersonalInformation,
+    InfantInformation,
+    LongTextInput, 
+    DoubleTextInput, 
+    BirthdayAndAgeComponent
 }
