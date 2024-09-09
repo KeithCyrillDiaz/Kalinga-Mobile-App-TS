@@ -14,13 +14,18 @@ const ScreeningFormSchema = new mongoose.Schema({
     userType: {type: String, required: true},
 
   //Infant Information
-    childName: {type: String},
-    birthWeight: {type: String},
-    sex: {type: String},
-    childAge: {type: String},
-    childBirthDate: {type: String},
-    ageOfGestation: {type: String},
-    medicalCondition: {type: String},
+    childInformation: {type:[
+      {
+        name: {type: String, required: true},
+        birthWeight: {type: String},
+        sex: {type: String},
+        birthDay: {type: String},
+        age: {type: String},
+        ageOfGestation: {type: String},
+        medicalCondition: {type: String},
+      }
+  ]},
+
 
     typeOfDonor:{type: String},
     QA: {type: String},

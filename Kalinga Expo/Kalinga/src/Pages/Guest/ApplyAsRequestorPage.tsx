@@ -5,13 +5,12 @@ import { ApplyAsRequestorProps } from "@/data/props";
 import { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
 import { RootStackParams } from "@@/App";
 import { useNavigation } from "@react-navigation/native";
-import { useScreeningForm } from "@/hooks";
+
 
 export default function ApplyAsRequestorPage ({route}: ApplyAsRequestorProps) {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     const {userType} = route.params
-    const { data, handleUpdateForm} = useScreeningForm({userType: "Requestor"})
  
     return(
         <>
@@ -38,8 +37,7 @@ export default function ApplyAsRequestorPage ({route}: ApplyAsRequestorProps) {
                     fontWeight: "bold"
                 }}
                 >Initial Screening Form</Text>
-                <PersonalInformation userType='Requestor'
-                />
+                <PersonalInformation userType='Requestor'/>
                 <InfantInformation userType='Requestor'/>
            
             </ScrollView >

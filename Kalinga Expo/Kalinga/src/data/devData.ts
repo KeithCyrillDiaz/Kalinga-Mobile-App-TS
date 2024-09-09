@@ -58,3 +58,8 @@ For any inquiries, concerns, or requests concerning our Data Privacy Policy or t
 
 8. Changes to this Policy:
 We reserve the right to update or modify this Data Privacy Policy as needed. Any revisions will be promptly communicated and reflected on our website along with the updated effective date.`
+
+export const sexData = [
+  {label: "Male", value: "Male"},
+  {label: "Female", value: "Female"},
+]

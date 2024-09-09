@@ -6,13 +6,10 @@ import { PageIndicator } from "@/Components";
 import { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
 import { RootStackParams } from "@@/App";
 import { useNavigation } from "@react-navigation/native";
-import { useScreeningForm } from "@/hooks";
 
 export default function ApplyAsDonorPage ({route}: ApplyAsDonorProps) {
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     const {userType} = route.params
-    const { data, handleChangeText } = useScreeningForm({userType: "Donor"})
-    
     return(
         <>
         <KalingaStatusBar 
@@ -36,8 +33,9 @@ export default function ApplyAsDonorPage ({route}: ApplyAsDonorProps) {
                     fontWeight: "bold"
                 }}
                 >Initial Screening Form</Text>
-                <PersonalInformation userType="Donor"/>
-                <InfantInformation handleChangeText={handleChangeText} form={data}/>
+                 <PersonalInformation userType='Donor'
+                />
+                <InfantInformation userType='Donor'/>
             </View>
         </>
     

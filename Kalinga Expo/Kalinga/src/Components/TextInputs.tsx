@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Dimensions } from "react-native";
 import { kalingaColor } from "@/styles/styles";
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { calculateAge } from "@/functions/age";
+import { Dropdown } from "react-native-element-dropdown";
+import { sexData } from "@/data/devData";
 
 interface LongTextInputProps {
     placeHolder?: string;
@@ -14,6 +16,8 @@ interface LongTextInputProps {
     fieldName?: string;
     value?: string
 }
+
+const {height, width} = Dimensions.get("screen")
 
 export const LongTextInput: React.FC<LongTextInputProps> = ({
     placeHolder,
@@ -206,6 +210,59 @@ export const BirthdayAndAgeComponent: React.FC<BirthdayAndAgeComponentProps> = (
             }}
 
            />}
+        </View>
+    )
+}
+
+
+export const BirthWeightAndSex: React.FC = () => {
+
+    const [focus, setIsFocus] = useState<boolean>(false)
+    const [value, setValue] = useState<string>()
+
+    return(
+        <View style={{
+            flexDirection: "row",
+            gap: 7,
+            height: 50
+        }}>
+        <TextInput
+        placeholder="BirthWeight"
+        placeholderTextColor={kalingaColor.text}
+        style={{
+            elevation: 7,
+            backgroundColor: "white",
+            color: kalingaColor.text,
+            padding: 10,
+            borderRadius: 22,
+            width: width/2
+        }}
+        />
+        <Dropdown
+        style={{
+            backgroundColor: "white",
+            padding: 10,
+            borderRadius:22,
+            elevation: 7,
+            flex: 1
+        }}
+        placeholderStyle={{color: kalingaColor.text}}
+        selectedTextStyle={{color: kalingaColor.text}}
+        data={sexData}
+        labelField={"label"}
+        valueField={"value"}
+        search
+        maxHeight={300}
+        searchPlaceholder="Search..."
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
+        value={value}
+        onChange={item => {
+            setValue(item.value);
+            setIsFocus(false);
+          }}
+
+        />
         </View>
     )
 }
