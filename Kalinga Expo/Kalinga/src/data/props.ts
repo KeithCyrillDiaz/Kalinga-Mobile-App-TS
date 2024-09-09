@@ -19,7 +19,15 @@ export interface ScreeningFormType {
     homeAddress: string;
     sex: string;
     childName: string;
-    childAge: string;
+    childrenInformation: [{
+        name: string,
+        birthWeight: string,
+        sex: string,
+        birthDay: string,
+        age: string,
+        ageOfGestation: string,
+        medicalCondition: string,
+    }],
     childBirthDate: string;
     birthWeight: string;
     RFR: string;

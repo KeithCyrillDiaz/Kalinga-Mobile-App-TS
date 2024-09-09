@@ -1,6 +1,6 @@
 import { Text, View } from "react-native"
 import { ScreeningFormType } from "@/data/props"
-import { LongTextInput, DoubleTextInput, BirthdayAndAgeComponent } from "@/Components/TextInputs"
+import { LongTextInput, DoubleTextInput, BirthdayAndAgeComponent, BirthWeightAndSex } from "@/Components/TextInputs"
 import { kalingaColor } from "@/styles/styles"
 import { useScreeningForm } from "@/hooks"
 
@@ -39,12 +39,8 @@ export const InfantInformation: React.FC<InfantInformationProps> = ({
           fieldName="childName"
           value={data.childName}
           />
-          <DoubleTextInput
-          placeHolderLeftInput="Birth Weight"
-          placeHolderRightInput="Sex"
-          sameLength={true}
-          placeHolderColor={kalingaColor.text}
-          />
+          <BirthWeightAndSex/>
+          
          <BirthdayAndAgeComponent
           ageValue={data.childAge} 
           birthDayValue={data.childBirthDate}
