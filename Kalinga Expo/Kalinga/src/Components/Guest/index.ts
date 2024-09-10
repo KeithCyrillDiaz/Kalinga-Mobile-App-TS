@@ -1,7 +1,5 @@
-import { PersonalInformation } from "./ScreeningFormComponent/PersonalInformation";
-import { InfantInformation } from "./ScreeningFormComponent/InfantInformation";
+import { ScreeningForm } from "./ScreeningForm"
 
 export {
-    PersonalInformation,
-    InfantInformation
+   ScreeningForm
 }

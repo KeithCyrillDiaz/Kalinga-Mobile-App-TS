@@ -12,6 +12,7 @@ const ScreeningFormSchema = new mongoose.Schema({
     municipality: {type: String, required: true},
     barangay: {type: String, required: true},
     userType: {type: String, required: true},
+    numberOfBabies: {type: String},
 
   //Infant Information
     childInformation: {type:[

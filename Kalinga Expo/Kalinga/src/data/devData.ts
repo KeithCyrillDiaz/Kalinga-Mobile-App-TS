@@ -63,3 +63,11 @@ export const sexData = [
   {label: "Male", value: "Male"},
   {label: "Female", value: "Female"},
 ]
+
+export const babyOptions = [
+  { label: 'Single Baby', value: '1' },
+  { label: 'Twins', value: '2' },
+  { label: 'Triplets', value: '3' },
+  { label: 'Quadruplets', value: '4' },
+  { label: 'Quintuplets', value: '5' },
+];

@@ -20,6 +20,7 @@
     "expo-font": "^12.0.9",
     "expo-linear-gradient": "^13.0.2",
     "expo-status-bar": "~1.12.1",
+    "philippine-location-json-for-geer": "^1.1.11",
     "randomatic": "^3.1.1",
     "react": "18.2.0",
     "react-native": "0.74.5",

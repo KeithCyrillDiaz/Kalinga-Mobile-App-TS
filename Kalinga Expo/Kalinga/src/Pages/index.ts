@@ -4,8 +4,8 @@ import OnBoardingPage from './OnBoarding'
 import GuestHomePage from './Guest/GuestHomePage'
 import DataPrivacyPage from './DataPrivacyPage'
 import MilkBankLocatorPage from './MilkBankLocatorPage'
-import ApplyAsRequestorPage from './Guest/ApplyAsRequestorPage'
-import ApplyAsDonorPage from './Guest/ApplyAsDonorPage'
+import ApplyAsRequestorPage from './Guest/ScreeningForm/ApplyAsRequestorPage'
+import ApplyAsDonorPage from './Guest/ScreeningForm/ApplyAsDonorPage'
 
 export {
     SplashScreen,
