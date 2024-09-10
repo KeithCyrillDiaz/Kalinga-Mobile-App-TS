@@ -7,14 +7,20 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { calculateAge } from "@/functions/age";
 import { Dropdown } from "react-native-element-dropdown";
 import { sexData } from "@/data/devData";
+import { ChildrenInfo, ScreeningFormType } from "@/data/props";
+import { useAddressDropDownHook } from "@/hooks/AddressDropDownHook";
+import { allRegions } from "@/functions/philippines";
+
 
 interface LongTextInputProps {
     placeHolder?: string;
     placeHolderColor?: string;
     multiline?: boolean;
-    handleChangeText?: (name: string, value: string) => void;
+    handleChangeText?: (name: string, value: string, formType: string, index: number) => void;
     fieldName?: string;
-    value?: string
+    value?: string;
+    formType: "Infant" | "Personal";
+    index?: number
 }
 
 const {height, width} = Dimensions.get("screen")
@@ -25,7 +31,9 @@ export const LongTextInput: React.FC<LongTextInputProps> = ({
     multiline,
     handleChangeText  = () => {},
     fieldName = "",
-    value = ""
+    value = "",
+    formType,
+    index = 0
 }) => {
     return(
         <TextInput
@@ -40,7 +48,7 @@ export const LongTextInput: React.FC<LongTextInputProps> = ({
         placeholder={placeHolder}
         placeholderTextColor={placeHolderColor}
         multiline={multiline}
-        onChangeText={(text) => handleChangeText(fieldName, text)}
+        onChangeText={(text) => handleChangeText(fieldName, text, formType, index)}
         value={value}
         />
     )
@@ -114,6 +122,10 @@ export const DoubleTextInput: React.FC<DoubleTextInputProps> = ({
 
 
 interface BirthdayAndAgeComponentProps {
+    data?: {
+        birthday: string,
+        age: string
+    },
     birthDayValue?: string
     ageValue?: string
     sameLength?: boolean
@@ -121,11 +133,18 @@ interface BirthdayAndAgeComponentProps {
     placeHolderRightInput?: string;
     placeHolderColor?: string; 
     formType: string
-    handleChangeDate: (event: 
-        DateTimePickerEvent, 
+    updateInfantBirthday?: (
+        index: number,
+        event: DateTimePickerEvent, 
         value: Date | undefined, 
         formType: string, 
         ageCalculation?: boolean) => void
+    updateMotherBirthday?: (
+            event: DateTimePickerEvent, 
+            value: Date | undefined, 
+            formType: string, 
+            ageCalculation?: boolean) => void
+    index?: number
 }
 
 export const BirthdayAndAgeComponent: React.FC<BirthdayAndAgeComponentProps> = ({
@@ -135,8 +154,11 @@ export const BirthdayAndAgeComponent: React.FC<BirthdayAndAgeComponentProps> = (
     sameLength,
     birthDayValue = "",
     ageValue = "",
-    handleChangeDate = () => {},
-    formType = ""
+    updateMotherBirthday = () => {},
+    updateInfantBirthday = () => {},
+    formType = "",
+    data,
+    index = 0
 }) => {
 
     const [dateSelected, setDateSelected] = useState<Date>(new Date())
@@ -156,11 +178,12 @@ export const BirthdayAndAgeComponent: React.FC<BirthdayAndAgeComponentProps> = (
                 borderRadius: 22,
                 elevation: 7,
                 ...(sameLength ? { flex: 1 } : { width: '35%' }),
-                paddingHorizontal: 20
+                paddingHorizontal: 20,
+                height: 40
                 }}
             placeholder={placeHolderLeftInput}
             placeholderTextColor={placeHolderColor}
-            value = {ageValue}
+            value = {formType === "Infant" ? data?.age : ageValue}
             editable={false}
             />
             {/* Right Side Input Box */}
@@ -172,16 +195,19 @@ export const BirthdayAndAgeComponent: React.FC<BirthdayAndAgeComponentProps> = (
                     backgroundColor: "white",
                     borderRadius: 22,
                     elevation: 7,
+                    height: 40,
+                    paddingLeft: 5
             }}
             >
                 <TextInput
                     style={{
                         padding: 10,
-                        color: kalingaColor.text
+                        color: kalingaColor.text,
+                 
                     }}
                     placeholder={placeHolderRightInput}
                     placeholderTextColor={placeHolderColor}
-                    value = {birthDayValue}
+                    value = {formType === "Infant" ? data?.birthday : birthDayValue}
                     editable={false}
                 />
                 <TouchableOpacity
@@ -205,7 +231,8 @@ export const BirthdayAndAgeComponent: React.FC<BirthdayAndAgeComponentProps> = (
             display="spinner"
             onChange={(event, value) => {
                 setShowDateTimePicker(false)
-                handleChangeDate(event, value, formType, true)
+                if(formType !== "Personal") updateInfantBirthday(index, event, value, formType, true)
+                    else updateMotherBirthday(event, value, formType, true)
                 setDateSelected(value ?? new Date())
             }}
 
@@ -214,8 +241,20 @@ export const BirthdayAndAgeComponent: React.FC<BirthdayAndAgeComponentProps> = (
     )
 }
 
+interface BirthWeightAndSexProps {
+    handleUpdateInfantInformation: (index: number, name: keyof ChildrenInfo, value: string) => void
+    index: number
+    data: {
+        birthWeight: string,
+        sex: string
+    }
+}
 
-export const BirthWeightAndSex: React.FC = () => {
+export const BirthWeightAndSex: React.FC<BirthWeightAndSexProps> = ({
+    handleUpdateInfantInformation = () => {},
+    index = 0,
+    data
+}) => {
 
     const [focus, setIsFocus] = useState<boolean>(false)
     const [value, setValue] = useState<string>()
@@ -224,7 +263,6 @@ export const BirthWeightAndSex: React.FC = () => {
         <View style={{
             flexDirection: "row",
             gap: 7,
-            height: 50
         }}>
         <TextInput
         placeholder="BirthWeight"
@@ -235,34 +273,189 @@ export const BirthWeightAndSex: React.FC = () => {
             color: kalingaColor.text,
             padding: 10,
             borderRadius: 22,
-            width: width/2
+            width: width/2,
+            height: 40,
+            paddingHorizontal: 20
         }}
-        />
+        keyboardType="numeric"
+        onChangeText={(text) => handleUpdateInfantInformation(index, "birthWeight", text)}
+        value={data.birthWeight}
+       />
         <Dropdown
         style={{
             backgroundColor: "white",
             padding: 10,
             borderRadius:22,
             elevation: 7,
-            flex: 1
+            flex: 1,
+            height: 40
         }}
-        placeholderStyle={{color: kalingaColor.text}}
-        selectedTextStyle={{color: kalingaColor.text}}
+        placeholderStyle={{
+            color: kalingaColor.text,
+            fontSize: 14,
+            paddingLeft: 10
+        }}
+        selectedTextStyle={{
+            color: kalingaColor.text,
+            fontSize: 14,
+            paddingLeft: 10
+        }}
+        placeholder="Sex"
         data={sexData}
         labelField={"label"}
         valueField={"value"}
-        search
         maxHeight={300}
         searchPlaceholder="Search..."
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
         value={value}
-        onChange={item => {
-            setValue(item.value);
-            setIsFocus(false);
-          }}
+        onChange={item => handleUpdateInfantInformation(index, "sex", item.value)}
 
         />
         </View>
+    )
+}
+
+interface AddressDropDownsProps {
+    handleUpdateAddress: (name: keyof ScreeningFormType, value: {name: string}) => void
+}
+export const AddressDropDowns: React.FC<AddressDropDownsProps> = ({
+    handleUpdateAddress = () => {}
+}) => {
+
+    const {
+        provinces, 
+        cities, 
+        barangays,
+        updateBarangayList,
+        updateCitiesList,
+        updateProvinceList,
+   
+    } = useAddressDropDownHook()
+
+    return(
+
+        <>
+            <Dropdown
+            style={{
+                backgroundColor: "white",
+                padding: 10,
+                borderRadius:22,
+                elevation: 7,
+                flex: 1,
+                height: 40
+            }}
+            placeholderStyle={{
+                color: kalingaColor.text,
+                fontSize: 14,
+                paddingLeft: 10
+            }}
+            selectedTextStyle={{  
+                color: kalingaColor.text,
+                fontSize: 14,
+                paddingLeft: 10
+            }}
+            data={allRegions}
+            search
+            labelField="name"
+            valueField="reg_code"
+            placeholder="Select Region"
+            maxHeight={270}
+            onChange={item => {
+                updateProvinceList(item)
+            }}
+            />
+
+
+            <Dropdown
+            style={{
+                backgroundColor: "white",
+                padding: 10,
+                borderRadius:22,
+                elevation: 7,
+                flex: 1,
+                height: 40
+            }}
+            placeholderStyle={{
+                color: kalingaColor.text,
+                fontSize: 14,
+                paddingLeft: 10
+            }}
+            selectedTextStyle={{  
+                color: kalingaColor.text,
+                fontSize: 14,
+                paddingLeft: 10
+            }}
+            data={provinces}
+            search
+            labelField="name"
+            valueField="prov_code"
+            placeholder="Select Province"
+            maxHeight={270}
+            onChange={item => {
+                updateCitiesList(item)
+                handleUpdateAddress("Municipality", {name: ""})
+            }}
+            />
+            <Dropdown
+            style={{
+                backgroundColor: "white",
+                padding: 10,
+                borderRadius:22,
+                elevation: 7,
+                flex: 1,
+                height: 40
+            }}
+            placeholderStyle={{
+                color: kalingaColor.text,
+                fontSize: 14,
+                paddingLeft: 10
+            }}
+            selectedTextStyle={{  
+                color: kalingaColor.text,
+                fontSize: 14,
+                paddingLeft: 10
+            }}
+            data={cities}
+            search
+            labelField="name"
+            valueField="name"
+            placeholder="Select City"
+            maxHeight={270}
+            onChange={item => {
+                updateBarangayList(item)
+                handleUpdateAddress("Municipality", item)
+            }}
+            />
+            <Dropdown
+            style={{
+                backgroundColor: "white",
+                padding: 10,
+                borderRadius:22,
+                elevation: 7,
+                flex: 1,
+                height: 40
+            }}
+            placeholderStyle={{
+                color: kalingaColor.text,
+                fontSize: 14,
+                paddingLeft: 10
+            }}
+            selectedTextStyle={{  
+                color: kalingaColor.text,
+                fontSize: 14,
+                paddingLeft: 10
+            }}
+            data={barangays}
+            search
+            labelField="name"
+            valueField="name"
+            placeholder="Select Barangay"
+            maxHeight={270}
+            onChange={item => {
+                updateBarangayList(item)
+                handleUpdateAddress("barangay", item)
+            }}
+            />
+        </>
+       
     )
 }
