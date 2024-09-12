@@ -1,9 +1,9 @@
 import { kalingaColor } from "@/styles/styles";
 
 import { View, Text, TextInput, Dimensions, TouchableOpacity } from "react-native";
-import { AddressDropDowns, BirthdayAndAgeComponent, BirthWeightAndSex } from "../TextInputs";
+import { AddressDropDowns, BirthdayAndAgeComponent, BirthWeightAndSex } from "../../TextInputs";
 import { useScreeningForm } from "@/hooks";
-import { textStyles } from "@/styles/textInput";
+import { textStyles } from "@/styles/styleSheet";
 import { Dropdown } from "react-native-element-dropdown";
 import { babyOptions } from "@/data/devData";
 import { ScreeningFormType } from "@/data/props";
@@ -29,7 +29,7 @@ export const ScreeningForm: React.FC<ScreeningFormProps> = ({userType, data}) =>
         style={{
             paddingHorizontal: "7%",
             paddingBottom: "7%",
-            gap: 10
+            gap: 10,
         }}
         >
             <Text
@@ -37,7 +37,6 @@ export const ScreeningForm: React.FC<ScreeningFormProps> = ({userType, data}) =>
                 fontSize: 17,
                 color: kalingaColor.text,
                 fontWeight: "bold"
-
             }}
             >
                 Personal Information
