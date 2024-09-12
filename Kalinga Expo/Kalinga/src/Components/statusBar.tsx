@@ -27,7 +27,8 @@ export const KalingaStatusBar: React.FC<Props> = ({
     params
 }) => {
     return(
-        <View style={[styles.container,
+        <>
+            <View style={[styles.container,
                 {
                     height: !home ? height * 0.1 : height * 0.2,
                     position: "absolute",
@@ -56,6 +57,7 @@ export const KalingaStatusBar: React.FC<Props> = ({
                   </View>
             }
         </View>
+        </>
     )
 }
 

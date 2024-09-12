@@ -1,4 +1,4 @@
-import { ScreeningForm } from "./ScreeningForm"
+import { ScreeningForm } from "./ScreeningForm/ScreeningForm"
 
 export {
    ScreeningForm

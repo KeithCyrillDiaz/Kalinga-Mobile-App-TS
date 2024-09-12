@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from "react-native";
-import { MenuButtonCard } from "../Buttons";
+import { MenuButtonCard } from "../Buttons/Buttons";
 import { RootStackParams } from "@@/App";
 import { StackNavigationProp } from "@react-navigation/stack";
 

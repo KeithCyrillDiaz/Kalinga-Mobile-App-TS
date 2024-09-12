@@ -10,5 +10,16 @@ export const textStyles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: 22,
         height: 40
+    },
+
+    formTitle: {
+        textAlign: "center",
+        marginVertical: 20,
+        fontSize: 20,
+        color: kalingaColor.text,
+        fontWeight: "bold"
     }
 })
+
+
+

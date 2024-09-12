@@ -3,6 +3,7 @@ import { RootStackParams } from "@@/App"
 
 export type DataPrivacyProps = StackScreenProps<RootStackParams, 'DataPrivacyPage'>
 export type ApplyAsRequestorProps = StackScreenProps<RootStackParams, 'ApplyAsRequestorPage'>
+export type ApplyAsRequestorPage2Props = StackScreenProps<RootStackParams, 'ApplyAsRequestorPage2'>
 export type ApplyAsDonorProps = StackScreenProps<RootStackParams, 'ApplyAsDonorPage'>
 
 export interface ChildrenInfo {
@@ -47,10 +48,48 @@ export interface ScreeningFormType {
     MH10?: string;
     MH11?: string;
     MH12?: string;
-    MH13?: string;
+    MH13?: string;        
     MH14?: string;
     MH14_Reason?: string;
     MH15?: string;
     SH1?: string;
     SH2?: string;
 }
+
+
+export interface ImageTypes {
+    uri: string;
+    name: string;
+    type: string | undefined;
+    fileName?: string;
+    fileSize: number | undefined;
+    owner: string;
+    ownerID: string;
+    userType: "Requestor" | "Donor";
+}
+
+export interface FileTypes {
+    name: string;
+    uri: string;
+    type: string | undefined;
+    userType: "Requestor" | "Donor";
+    owner: string;
+    fileSize: number | undefined;
+    requirementType: string;
+    ownerID: string;
+}
+
+export interface Requirements {
+    Requestor: 
+        | "Clinical History"
+        | "Presenting Complaint"
+        | "Clinical Findings"
+        | "Diagnosis"
+        | "Treatments and Interventions"
+        | "Prescription"
+        | "Government ID";
+}
+
+export type SelectedImages = {
+    [key in Requirements["Requestor"]]?: ImageTypes;
+};

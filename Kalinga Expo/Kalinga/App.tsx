@@ -12,8 +12,10 @@ import {
   DataPrivacyPage,
   MilkBankLocatorPage,
   ApplyAsRequestorPage,
+  ApplyAsRequestorPage2,
   ApplyAsDonorPage
 } from '@/Pages'
+import { ScreeningFormType } from '@/data/props';
 
 
 export type RootStackParams = {
@@ -24,7 +26,9 @@ export type RootStackParams = {
   DataPrivacyPage: {userType: string};
   MilkBankLocatorPage: undefined;
   ApplyAsRequestorPage: {userType: string};
+  ApplyAsRequestorPage2: {userType: string, data: ScreeningFormType};
   ApplyAsDonorPage: {userType: string}
+
 }
 
 const Stack = createStackNavigator<RootStackParams>()
@@ -50,7 +54,11 @@ export default function App() {
         <Stack.Screen name='GuestHomePage' component={GuestHomePage}/>
         <Stack.Screen name='DataPrivacyPage' component={DataPrivacyPage}/>
         <Stack.Screen name='MilkBankLocatorPage' component={MilkBankLocatorPage}/>
+
+        {/* ScreeningForms */}
         <Stack.Screen name='ApplyAsRequestorPage' component={ApplyAsRequestorPage}/>
+        <Stack.Screen name='ApplyAsRequestorPage2' component={ApplyAsRequestorPage2}/>
+        
         <Stack.Screen name='ApplyAsDonorPage' component={ApplyAsDonorPage}/>
         
 
