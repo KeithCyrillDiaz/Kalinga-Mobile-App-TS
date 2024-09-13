@@ -2,7 +2,7 @@ import { kalingaColor } from "@/styles/styles";
 import React, {useState, useEffect} from "react";
 import { View, Text, TouchableOpacity, Image, Dimensions, Modal, ScrollView} from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
-import { SelectedImages } from "@/data/props";
+import { Requirements, SelectedImages } from "@/data/props";
 import ImageZoom from "react-native-image-pan-zoom";
 
 const {height, width} = Dimensions.get('screen')
@@ -35,7 +35,7 @@ export const ImagesContainer: React.FC<ImagesContainerProps> = ({
                      <ImageContainer
                      key={requirementType}
                      uri={value.uri}
-                     title={requirementType}
+                     title={requirementType as Requirements["Donor" | "Requestor"]}
                      />
                  ))}
              
@@ -49,7 +49,7 @@ export const ImagesContainer: React.FC<ImagesContainerProps> = ({
 
 interface ImageContainerProps {
     uri: string | undefined,
-    title: string
+    title: Requirements["Donor" | "Requestor"];
 }
 export const ImageContainer: React.FC<ImageContainerProps> = ({
     uri,

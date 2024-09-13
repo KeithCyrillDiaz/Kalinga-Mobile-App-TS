@@ -8,13 +8,14 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ScrollView, View } from "react-native";
 import { useImagePickerHook } from "@/hooks/ImageAndDocumentPickerHooks";
+import { FilesContainer } from "@/Components/Guest/ScreeningForm/filesContainer";
 
 
 export default function ApplyAsRequestorPage2 ({route}:  ApplyAsRequestorPage2Props) {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     const {data, userType} = route.params
-    const {images, uploadImage} =useImagePickerHook()
+    const {images, files,  uploadImage, uploadFile} =useImagePickerHook()
     return(
         <>
             <KalingaStatusBar
@@ -31,8 +32,9 @@ export default function ApplyAsRequestorPage2 ({route}:  ApplyAsRequestorPage2Pr
                 <View style={{marginTop: 100}}/> 
                 {/* for spacing */}
                 <PageIndicator pageNumber={3} currentPageNumber={2}/>
-                <MedicalAbstractInfant uploadImage={uploadImage}/>
+                <MedicalAbstractInfant uploadImage={uploadImage} uploadFile={uploadFile}/>
                 <ImagesContainer images = {images}/>
+                <FilesContainer files = {files}/>
                  {/* for spacing */}
                 <View style={{marginBottom: 70}}/> 
                

@@ -13,12 +13,14 @@ import { Requirements } from "@/data/props";
 const {width, height} = Dimensions.get('screen')
 interface MedicalAbstractButtonProps {
     title: Requirements["Requestor"];
-    uploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor"]) => void;
+    uploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor" | "Donor"]) => void;
+    uploadFile: (requirementType: Requirements["Requestor" | "Donor"]) => void;
 }
 
 export const MedicalAbstractButton: React.FC<MedicalAbstractButtonProps> = ({
     title,
-    uploadImage
+    uploadImage,
+    uploadFile,
 }) => {
 
     const [openUploadModal, setOpenUploadModal] = useState<boolean>(false)
@@ -60,6 +62,7 @@ export const MedicalAbstractButton: React.FC<MedicalAbstractButtonProps> = ({
                     marginBottom: 7
                 }}>|</Text>
                 <TouchableOpacity
+                  onPress={() => uploadFile(title)}
                 style={{ backgroundColor: "pink", padding: 4, borderRadius: 7}}
                 >
                     <AntDesign name="filetext1" size={24} color={kalingaColor.text} />

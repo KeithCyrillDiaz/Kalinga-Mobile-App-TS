@@ -7,11 +7,23 @@ import React from "react";
 import { View, Text} from "react-native";
 
 interface MedicalAbstractInfantProps {
-    uploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor"]) => void
+    uploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor"]) => void;
+    uploadFile: (requirementType: Requirements["Requestor" | "Donor"]) => void;
 }
 export const MedicalAbstractInfant: React.FC<MedicalAbstractInfantProps> = ({
-    uploadImage
+    uploadImage,
+    uploadFile,
 }) => {
+
+    const buttonData: Array<Requirements["Requestor"]> = [
+        "Clinical History",
+        "Presenting Complaint",
+        "Clinical Findings",
+        "Diagnosis",
+        "Treatments and Interventions",
+        "Prescription",
+        "Government ID",
+    ];
     return(
         <>
            <Text
@@ -24,13 +36,14 @@ export const MedicalAbstractInfant: React.FC<MedicalAbstractInfantProps> = ({
             marginBottom: 7
            }}
            >Note: Please make sure that your images are clear</Text>
-                <MedicalAbstractButton title="Clinical History" uploadImage = {uploadImage}/>
-                <MedicalAbstractButton title="Presenting Complaint" uploadImage = {uploadImage}/>
-                <MedicalAbstractButton title="Clinical Findings" uploadImage = {uploadImage}/>
-                <MedicalAbstractButton title="Diagnosis" uploadImage = {uploadImage}/>
-                <MedicalAbstractButton title="Treatments and Interventions" uploadImage = {uploadImage}/>
-                <MedicalAbstractButton title="Prescription" uploadImage = {uploadImage}/>
-                <MedicalAbstractButton title="Government ID" uploadImage = {uploadImage}/>
+           {buttonData.map((item, id) => (
+             <MedicalAbstractButton 
+             key={id}
+             title={item}
+             uploadImage = {uploadImage}
+             uploadFile={uploadFile} 
+             />
+           ))}
         </>
     )
 }

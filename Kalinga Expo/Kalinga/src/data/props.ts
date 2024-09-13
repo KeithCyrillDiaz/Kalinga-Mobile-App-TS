@@ -88,8 +88,21 @@ export interface Requirements {
         | "Treatments and Interventions"
         | "Prescription"
         | "Government ID";
+    
+    Donor: 
+        | "Clinical History"
+        | "Presenting Complaint"
+        | "Clinical Findings"
+        | "Diagnosis"
+        | "Treatments and Interventions"
+        | "Prescription"
+        | "Government ID";
 }
 
 export type SelectedImages = {
-    [key in Requirements["Requestor"]]?: ImageTypes;
+    [key in Requirements["Requestor" | "Donor"]]?: ImageTypes;
 };
+
+export type SelectedFiles = {
+    [key in Requirements["Requestor" | "Donor"]]?: FileTypes;
+}
