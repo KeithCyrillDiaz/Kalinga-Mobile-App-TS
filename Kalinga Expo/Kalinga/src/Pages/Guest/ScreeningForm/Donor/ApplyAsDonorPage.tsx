@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import { View, Text } from "react-native";
-import { KalingaStatusBar, PersonalInformation, InfantInformation } from "@/Components";
+import { View, Text, ScrollView } from "react-native";
+import { KalingaStatusBar, CustomButton } from "@/Components";
 import { ApplyAsDonorProps, ScreeningFormType } from "@/data/props";
 import { PageIndicator } from "@/Components";
 import { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
@@ -8,11 +8,12 @@ import { RootStackParams } from "@@/App";
 import { useNavigation } from "@react-navigation/native";
 import { ScreeningForm } from '@/Components/Guest';
 import { useScreeningForm } from "@/hooks";
+import { kalingaColor } from "@/styles/styles";
+import { DonorScreeningFormPage1keysTocheck } from "@/data/devData";
 
 export default function ApplyAsDonorPage ({route}: ApplyAsDonorProps) {
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     const {userType} = route.params
-    const {data } = useScreeningForm({userType: userType})
     return(
         <>
         <KalingaStatusBar 
@@ -21,12 +22,13 @@ export default function ApplyAsDonorPage ({route}: ApplyAsDonorProps) {
         back="GuestHomePage" 
         backButton={true}
         home = {false}/>
-         <View 
+         <ScrollView
             style={{
-                marginTop: "30%",
+                paddingTop: "20%",
             }}
+            showsVerticalScrollIndicator={false}
             >
-                <PageIndicator pageNumber={3} currentPageNumber={1}/>
+                <PageIndicator pageNumber={5} currentPageNumber={1}/>
                 <Text
                 style={{
                     textAlign: "center",
@@ -36,8 +38,14 @@ export default function ApplyAsDonorPage ({route}: ApplyAsDonorProps) {
                     fontWeight: "bold"
                 }}
                 >Initial Screening Form</Text>
-                <ScreeningForm userType='Donor' data={data}/>
-            </View>
+                <ScreeningForm userType='Donor'/>
+                <View
+                style={{
+                    marginVertical: 50
+                }}
+                />
+
+            </ScrollView >
         </>
     
     )

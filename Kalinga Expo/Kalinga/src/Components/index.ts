@@ -6,7 +6,6 @@ import { MenuButtonCard, CustomButton } from "./Buttons/Buttons";
 import { MapContainer } from "./MilkBankLocatorComponents";
 import { DataPrivacyAct } from "./dataPrivacyComponent";
 import { PageIndicator } from "./PageIndicator";
-import { PersonalInformation, InfantInformation } from "./Guest";
 import { LongTextInput, DoubleTextInput, BirthdayAndAgeComponent } from "./TextInputs";
 
 export {
@@ -21,8 +20,6 @@ export {
     DataPrivacyAct,
     CustomButton,
     PageIndicator,
-    PersonalInformation,
-    InfantInformation,
     LongTextInput, 
     DoubleTextInput, 
     BirthdayAndAgeComponent

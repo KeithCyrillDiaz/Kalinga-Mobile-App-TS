@@ -6,29 +6,25 @@ import { textStyles } from "@/styles/styleSheet";
 import React from "react";
 import { View, Text} from "react-native";
 
-interface MedicalAbstractInfantProps {
-    uploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor"]) => void;
+interface MedicalRequirementsProps {
+    uploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor" | "Donor"]) => void;
     uploadFile: (requirementType: Requirements["Requestor" | "Donor"]) => void;
+    buttonData: Array<Requirements["Requestor" | "Donor"]>;
+    userType: "Donor" | "Requestor";
 }
-export const MedicalAbstractInfant: React.FC<MedicalAbstractInfantProps> = ({
+export const MedicalRequirements: React.FC<MedicalRequirementsProps> = ({
     uploadImage,
     uploadFile,
+    buttonData,
+    userType
 }) => {
 
-    const buttonData: Array<Requirements["Requestor"]> = [
-        "Clinical History",
-        "Presenting Complaint",
-        "Clinical Findings",
-        "Diagnosis",
-        "Treatments and Interventions",
-        "Prescription",
-        "Government ID",
-    ];
+    if(buttonData.length)
     return(
         <>
            <Text
            style={textStyles.formTitle}
-           >Medical Abstract of Infant</Text>
+           >{userType === "Requestor" ? "Medical Abstract of Infant" : "Medical Requirements"}</Text>
             <Text
            style={{
             textAlign: "center",

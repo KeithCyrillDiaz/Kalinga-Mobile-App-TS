@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Dimensions } from "react-native";
 import { kalingaColor } from "@/styles/styles";
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
@@ -10,13 +10,14 @@ import { sexData } from "@/data/devData";
 import { ChildrenInfo, ScreeningFormType } from "@/data/props";
 import { useAddressDropDownHook } from "@/hooks/AddressDropDownHook";
 import { allRegions } from "@/functions/philippines";
+import { useScreeningForm } from "@/hooks";
 
 
 interface LongTextInputProps {
     placeHolder?: string;
     placeHolderColor?: string;
     multiline?: boolean;
-    handleChangeText?: (name: string, value: string, formType: string, index: number) => void;
+    handleChangeText?: (name: string, value: string, formType: string, index: number) => string;
     fieldName?: string;
     value?: string;
     formType: "Infant" | "Personal";
@@ -256,9 +257,6 @@ export const BirthWeightAndSex: React.FC<BirthWeightAndSexProps> = ({
     data
 }) => {
 
-    const [focus, setIsFocus] = useState<boolean>(false)
-    const [value, setValue] = useState<string>()
-
     return(
         <View style={{
             flexDirection: "row",
@@ -306,7 +304,6 @@ export const BirthWeightAndSex: React.FC<BirthWeightAndSexProps> = ({
         valueField={"value"}
         maxHeight={300}
         searchPlaceholder="Search..."
-        value={value}
         onChange={item => handleUpdateInfantInformation(index, "sex", item.value)}
 
         />
@@ -316,11 +313,17 @@ export const BirthWeightAndSex: React.FC<BirthWeightAndSexProps> = ({
 
 interface AddressDropDownsProps {
     handleUpdateAddress: (name: keyof ScreeningFormType, value: {name: string}) => void
+    data: {
+        Municipality: string,
+        barangay: string
+    }
 }
 export const AddressDropDowns: React.FC<AddressDropDownsProps> = ({
-    handleUpdateAddress = () => {}
+    handleUpdateAddress,
+    data,
 }) => {
-
+    console.log("data: ", data)
+   
     const {
         provinces, 
         cities, 
@@ -391,8 +394,8 @@ export const AddressDropDowns: React.FC<AddressDropDownsProps> = ({
             placeholder="Select Province"
             maxHeight={270}
             onChange={item => {
-                updateCitiesList(item)
                 handleUpdateAddress("Municipality", {name: ""})
+                updateCitiesList(item)
             }}
             />
             <Dropdown
@@ -421,9 +424,10 @@ export const AddressDropDowns: React.FC<AddressDropDownsProps> = ({
             placeholder="Select City"
             maxHeight={270}
             onChange={item => {
-                updateBarangayList(item)
                 handleUpdateAddress("Municipality", item)
+                updateBarangayList(item)
             }}
+          
             />
             <Dropdown
             style={{
@@ -451,7 +455,6 @@ export const AddressDropDowns: React.FC<AddressDropDownsProps> = ({
             placeholder="Select Barangay"
             maxHeight={270}
             onChange={item => {
-                updateBarangayList(item)
                 handleUpdateAddress("barangay", item)
             }}
             />

@@ -13,22 +13,35 @@ import {
   MilkBankLocatorPage,
   ApplyAsRequestorPage,
   ApplyAsRequestorPage2,
-  ApplyAsDonorPage
+  ApplyAsDonorPage,
+  ApplyAsDonorPage2,
+  ApplyAsDonorPage3,
+  ApplyAsDonorPage4,
+  ApplyAsDonorPage5
+  
 } from '@/Pages'
 import { ScreeningFormType } from '@/data/props';
 
+
+type UserTypeParam = { userType: string };
+
+// Define a reusable type for pages that require userType and data
+type UserWithFormDataParam = { userType: string; data: ScreeningFormType };
 
 export type RootStackParams = {
   SplashScreen: undefined;
   LogInPage: undefined;
   OnBoardingPage: undefined;
   GuestHomePage: undefined;
-  DataPrivacyPage: {userType: string};
+  DataPrivacyPage: UserTypeParam;
   MilkBankLocatorPage: undefined;
-  ApplyAsRequestorPage: {userType: string};
-  ApplyAsRequestorPage2: {userType: string, data: ScreeningFormType};
-  ApplyAsDonorPage: {userType: string}
-
+  ApplyAsRequestorPage: UserTypeParam;
+  ApplyAsRequestorPage2: UserWithFormDataParam;
+  ApplyAsDonorPage: UserTypeParam
+  ApplyAsDonorPage2: UserWithFormDataParam;
+  ApplyAsDonorPage3: UserWithFormDataParam;
+  ApplyAsDonorPage4: UserWithFormDataParam;
+  ApplyAsDonorPage5: UserWithFormDataParam;
 }
 
 const Stack = createStackNavigator<RootStackParams>()
@@ -60,6 +73,10 @@ export default function App() {
         <Stack.Screen name='ApplyAsRequestorPage2' component={ApplyAsRequestorPage2}/>
         
         <Stack.Screen name='ApplyAsDonorPage' component={ApplyAsDonorPage}/>
+        <Stack.Screen name='ApplyAsDonorPage2' component={ApplyAsDonorPage2}/>
+        <Stack.Screen name='ApplyAsDonorPage3' component={ApplyAsDonorPage3}/>
+        <Stack.Screen name='ApplyAsDonorPage4' component={ApplyAsDonorPage4}/>
+        <Stack.Screen name='ApplyAsDonorPage5' component={ApplyAsDonorPage5}/>
         
 
 

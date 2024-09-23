@@ -8,6 +8,10 @@ import ApplyAsRequestorPage from './Guest/ScreeningForm/Requestor/ApplyAsRequest
 import ApplyAsRequestorPage2 from './Guest/ScreeningForm/Requestor/ApplyAsRequestorPage2'
 
 import ApplyAsDonorPage from './Guest/ScreeningForm/Donor/ApplyAsDonorPage'
+import ApplyAsDonorPage2 from './Guest/ScreeningForm/Donor/ApplyAsDonorPage2'
+import ApplyAsDonorPage3 from './Guest/ScreeningForm/Donor/ApplyAsDonorPage3'
+import ApplyAsDonorPage4 from './Guest/ScreeningForm/Donor/ApplyAsDonorPage4'
+import ApplyAsDonorPage5 from './Guest/ScreeningForm/Donor/ApplyAsDonorPage5'
 
 export {
     SplashScreen,
@@ -20,7 +24,11 @@ export {
     ApplyAsRequestorPage,
     ApplyAsRequestorPage2,
 
-    ApplyAsDonorPage
+    ApplyAsDonorPage,
+    ApplyAsDonorPage2,
+    ApplyAsDonorPage3,
+    ApplyAsDonorPage4,
+    ApplyAsDonorPage5
 }
 
 

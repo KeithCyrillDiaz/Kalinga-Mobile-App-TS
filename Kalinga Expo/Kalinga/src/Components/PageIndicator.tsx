@@ -24,7 +24,8 @@ export const PageIndicator: React.FC<PageIndicatorProps> = ({pageNumber, current
             flexDirection: "row",
             gap: 17,
             alignSelf: "center",
-            marginTop: 20
+            marginVertical: 50,
+            marginBottom: 10
         }}
         >{
             arrayDummy.map((_, index) => (

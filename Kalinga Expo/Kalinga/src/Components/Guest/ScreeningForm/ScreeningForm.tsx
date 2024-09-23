@@ -5,24 +5,33 @@ import { AddressDropDowns, BirthdayAndAgeComponent, BirthWeightAndSex } from "..
 import { useScreeningForm } from "@/hooks";
 import { textStyles } from "@/styles/styleSheet";
 import { Dropdown } from "react-native-element-dropdown";
-import { babyOptions } from "@/data/devData";
-import { ScreeningFormType } from "@/data/props";
+import { babyOptions, DonorScreeningFormPage1keysTocheck, RequestorScreeningFormPage1keysTocheck } from "@/data/devData";
+import { ChildrenInfo, DonorPersonalInformationFormKeys, RequestorPersonalInformationFormKeys, ScreeningFormType } from "@/data/props";
+import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
+import { CustomButton } from "@/Components/Buttons/Buttons";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "@@/App";
 
 
 interface ScreeningFormProps {
     userType: string
-    data: ScreeningFormType
+    data?: ScreeningFormType;
 }
-export const ScreeningForm: React.FC<ScreeningFormProps> = ({userType, data}) => {
-
+export const ScreeningForm: React.FC<ScreeningFormProps> = ({
+    userType, 
+}) => {
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     const {
-            handleUpdatePersonalInformation, 
-            handleUpdateInfantInformation,
-            handleUpdateAddress,
-            updateInfantBirthday,
-            updateMotherBirthday,
-            addChildren,
-          } = useScreeningForm({userType: userType})
+        data,
+        handleUpdatePersonalInformation, 
+        handleUpdateInfantInformation,
+        handleUpdateAddress,
+        updateInfantBirthday,
+        updateMotherBirthday,
+        addChildren, 
+        validForm,
+    } = useScreeningForm({userType: userType, pageNumber: 1})
 
     return(
         <View
@@ -41,12 +50,14 @@ export const ScreeningForm: React.FC<ScreeningFormProps> = ({userType, data}) =>
             >
                 Personal Information
             </Text>
+
             <TextInput
             style={textStyles.LongTextInputStyle}
             placeholder="Full Name"
             placeholderTextColor={kalingaColor.text}
             onChangeText={(text) => handleUpdatePersonalInformation("fullName", text)}
             value={data.fullName}
+            maxLength={37}
             />
 
             <BirthdayAndAgeComponent
@@ -97,16 +108,21 @@ export const ScreeningForm: React.FC<ScreeningFormProps> = ({userType, data}) =>
             onChangeText={(text) => handleUpdatePersonalInformation("email", text)}
             value={data.email}
             />
+        
+
              <TextInput
             style={textStyles.LongTextInputStyle}
             placeholder="Contact Number"
             placeholderTextColor={kalingaColor.text}
             onChangeText={(text) => handleUpdatePersonalInformation("contactNumber", text)}
             value={data.contactNumber}
+            keyboardType="numeric"
+            maxLength={11}
             />
 
             <AddressDropDowns
             handleUpdateAddress={handleUpdateAddress}
+            data={{Municipality: data.Municipality, barangay: data.barangay}}
             />
 
              <TextInput
@@ -174,6 +190,17 @@ export const ScreeningForm: React.FC<ScreeningFormProps> = ({userType, data}) =>
                     })}
                 </>
             )}
+
+                <CustomButton
+                    disabled={validForm === false} 
+                    text="Next"
+                    navigation={navigation}
+                    navigateTo={userType === "Requestor" ? 'ApplyAsRequestorPage2' : 'ApplyAsDonorPage2'}
+                    color={kalingaColor.text}
+                    textColor='white'
+                    elevation={7}
+                    params={{userType: userType, data: data}}  
+                />
           
         </View>
     )

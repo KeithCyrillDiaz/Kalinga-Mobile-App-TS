@@ -1,10 +1,41 @@
 import { StackScreenProps } from "@react-navigation/stack"
 import { RootStackParams } from "@@/App"
 
-export type DataPrivacyProps = StackScreenProps<RootStackParams, 'DataPrivacyPage'>
-export type ApplyAsRequestorProps = StackScreenProps<RootStackParams, 'ApplyAsRequestorPage'>
-export type ApplyAsRequestorPage2Props = StackScreenProps<RootStackParams, 'ApplyAsRequestorPage2'>
-export type ApplyAsDonorProps = StackScreenProps<RootStackParams, 'ApplyAsDonorPage'>
+type PageProps<T extends keyof RootStackParams> = StackScreenProps<RootStackParams, T>;
+
+// Define specific page props using the utility type
+export type DataPrivacyProps = PageProps<'DataPrivacyPage'>;
+export type ApplyAsRequestorProps = PageProps<'ApplyAsRequestorPage'>;
+export type ApplyAsRequestorPage2Props = PageProps<'ApplyAsRequestorPage2'>;
+export type ApplyAsDonorProps = PageProps<'ApplyAsDonorPage'>;
+export type ApplyAsDonorPage2Props = PageProps<'ApplyAsDonorPage2'>;
+export type ApplyAsDonorPage3Props = PageProps<'ApplyAsDonorPage3'>
+export type ApplyAsDonorPage4Props = PageProps<'ApplyAsDonorPage4'>
+export type ApplyAsDonorPage5Props = PageProps<'ApplyAsDonorPage5'>
+
+type ScreeningFormTypePage2Keys = keyof ScreeningFormTypePage2;
+
+//forchecking Forms before submitting
+export type DonorPersonalInformationFormKeys = keyof Omit<ScreeningFormType, 
+'RFR' | 'childrenInformation' | 'numberOfBabies' | ScreeningFormTypePage2Keys
+>;
+
+export type DonorScreeningPage2FormKeys = keyof Pick<ScreeningFormTypePage2,
+    'QA' | 'QB' | 'Q1' | 'Q2'
+>;
+
+// Omit 'QA', 'QB', 'Q1', 'Q2', 'MH13', 'MH14', 'MH14_Reason', and 'MH15' from ScreeningFormTypePage2
+export type DonorScreeningPage3FormKeys = keyof Omit<ScreeningFormTypePage2, 
+    DonorScreeningPage2FormKeys | 'MH13' | 'MH14' | 'MH14_Reason' | 'MH15' | 'SH1' | 'SH2'
+>;
+
+// Omit the keys from both DonorScreeningPage2FormKeys and DonorScreeningPage3FormKeys
+export type DonorScreeningPage4FormKeys = keyof Omit<ScreeningFormTypePage2,
+   DonorScreeningPage2FormKeys | DonorScreeningPage3FormKeys
+>;
+
+export type RequestorPersonalInformationFormKeys = keyof Omit<ScreeningFormType, 
+'RFR' | ScreeningFormTypePage2Keys>;
 
 export interface ChildrenInfo {
     name: string,
@@ -16,7 +47,8 @@ export interface ChildrenInfo {
     medicalCondition: string,
 }
 
-export interface ScreeningFormType {
+
+export interface ScreeningFormType extends ScreeningFormTypePage2 {
     Applicant_ID: string;
     userType: string;
     fullName: string;
@@ -30,6 +62,13 @@ export interface ScreeningFormType {
     homeAddress: string;
     childrenInformation: Array<ChildrenInfo>,
     RFR: string;
+}
+
+
+
+
+
+export interface ScreeningFormTypePage2 {
     QA?: string;
     QB?: string;
     Q1?: string;
@@ -56,6 +95,11 @@ export interface ScreeningFormType {
     SH2?: string;
 }
 
+export interface questionTypes {
+    questionId: keyof ScreeningFormTypePage2;
+    question: string;
+    followUpQuestion: boolean;
+}
 
 export interface ImageTypes {
     uri: string;
@@ -90,12 +134,10 @@ export interface Requirements {
         | "Government ID";
     
     Donor: 
-        | "Clinical History"
-        | "Presenting Complaint"
-        | "Clinical Findings"
-        | "Diagnosis"
-        | "Treatments and Interventions"
-        | "Prescription"
+        | "Hepa B"
+        | "HIV"
+        | "Syphillis"
+        | "Pregnancy Booklet"
         | "Government ID";
 }
 
@@ -105,4 +147,9 @@ export type SelectedImages = {
 
 export type SelectedFiles = {
     [key in Requirements["Requestor" | "Donor"]]?: FileTypes;
+}
+
+export interface PersonalInformationKeysToCheck {
+    Requestor: RequestorPersonalInformationFormKeys,
+    Donor: DonorPersonalInformationFormKeys
 }
