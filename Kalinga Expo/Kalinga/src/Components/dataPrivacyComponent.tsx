@@ -16,7 +16,7 @@ export const DataPrivacyAct: React.FC = () => {
         }}>
             <Text
             style={{
-                fontFamily: 'Open-Sans-Bold',
+                fontFamily: 'Open-Sans-Condensed-Bold',
                 fontSize: 25,
                 color: '#E60965',
                 textAlign: "center"

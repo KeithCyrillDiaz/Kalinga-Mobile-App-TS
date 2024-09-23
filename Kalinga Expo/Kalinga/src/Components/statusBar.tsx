@@ -8,7 +8,7 @@ import { navigatePage, resetPage } from "@/functions";
 interface Props {
     title: String,
     name?: String,
-    home: boolean,
+    home?: boolean,
     back: keyof RootStackParams
     navigation: StackNavigationProp<RootStackParams>
     backButton?: boolean

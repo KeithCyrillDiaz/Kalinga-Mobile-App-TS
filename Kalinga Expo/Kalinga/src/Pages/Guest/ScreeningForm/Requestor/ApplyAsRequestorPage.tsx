@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { KalingaStatusBar, PageIndicator, PersonalInformation, InfantInformation, CustomButton } from "@/Components";
+import { KalingaStatusBar, PageIndicator, CustomButton } from "@/Components";
 import { ApplyAsRequestorProps } from "@/data/props";
 import { StackNavigationProp } from "@react-navigation/stack/lib/typescript/src/types";
 import { RootStackParams } from "@@/App";
@@ -14,8 +14,6 @@ export default function ApplyAsRequestorPage ({route}: ApplyAsRequestorProps) {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     const {userType} = route.params
-    const {data } = useScreeningForm({userType: userType})
- 
     return(
         <>
             <KalingaStatusBar 
@@ -42,16 +40,7 @@ export default function ApplyAsRequestorPage ({route}: ApplyAsRequestorProps) {
                     fontWeight: "bold"
                 }}
                 >Initial Screening Form</Text>
-                <ScreeningForm userType='Requestor' data = {data} />
-                <CustomButton
-                text="Next"
-                navigation={navigation}
-                navigateTo='ApplyAsRequestorPage2'
-                color={kalingaColor.text}
-                textColor='white'
-                elevation={7}
-                params={{userType: userType, data: data}}
-                />
+                <ScreeningForm userType='Requestor'/>
                 <View
                 style={{
                     marginVertical: 50

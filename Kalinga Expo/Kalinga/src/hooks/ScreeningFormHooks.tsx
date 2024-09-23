@@ -1,23 +1,32 @@
 import { barangay } from "@/data";
-import { ChildrenInfo, ScreeningFormType } from "@/data/props"
+import { DonorScreeningFormPage1keysTocheck, DonorScreeningFormPage2keysTocheck, DonorScreeningFormPage3keysTocheck, DonorScreeningFormPage4keysTocheck, RequestorScreeningFormPage1keysTocheck } from "@/data/devData";
+import { ChildrenInfo, DonorPersonalInformationFormKeys, DonorScreeningPage2FormKeys, DonorScreeningPage3FormKeys, DonorScreeningPage4FormKeys, PersonalInformationKeysToCheck, RequestorPersonalInformationFormKeys, ScreeningFormType, ScreeningFormTypePage2 } from "@/data/props"
 import { calculateAge } from "@/functions/age";
 import { formatDate } from "@/functions/date"
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker"
 import {useEffect, useState} from "react"
 import { Alert } from "react-native";
+import randomatic from 'randomatic';
 
 interface ScreeningFormProps {
-    userType: string;
+    userType?: string;
+    savedData?: ScreeningFormType | undefined
+    pageNumber: 1 | 2 | 3 | 4
 }
 
-export const useScreeningForm = ({userType = "", }: ScreeningFormProps) => {
+export const useScreeningForm = ({
+    userType = "",
+    savedData,
+    pageNumber
+}: ScreeningFormProps) => {
     
     //validations
     const [validMotherAge, setValidMotherAge] = useState<boolean>(true)
     const [validChildAge, setChildAge] = useState<boolean>(true)
+    const [validForm, setValidForm] = useState<boolean>(true)
 
-    const [data, setData ] = useState<ScreeningFormType>({
-        Applicant_ID: "",
+    const [data, setData ] = useState<ScreeningFormType>( savedData ?? {
+        Applicant_ID: randomatic('Aa0', 7) + String(Date.now()).slice(-7),
         userType: userType,
         fullName: '',
         Municipality: '',
@@ -30,39 +39,35 @@ export const useScreeningForm = ({userType = "", }: ScreeningFormProps) => {
         numberOfBabies: '',
         childrenInformation: [],
         RFR: '',
+        QA: '',
+        QB: '',
+        Q1: '',
+        Q2: '',
+        MH1: '',
+        MH2: '',
+        MH2_Reason: '',
+        MH3: '',
+        MH4: '',
+        MH5: '',
+        MH6: '',
+        MH7: '',
+        MH8: '',
+        MH8_Reason: '',
+        MH9: '',
+        MH10: '',
+        MH11: '',
+        MH12: '',
+        MH13: '',      
+        MH14: '',
+        MH14_Reason: '',
+        MH15: '',
+        SH1: '',
+        SH2: '',
     })
 
-    const childrenData = [
-        {
-            name: "Emma Johnson",
-            birthWeight: "3.2 kg",
-            sex: "Female",
-            birthday: "2023-09-01",
-            age: "1",
-            ageOfGestation: "38 weeks",
-            medicalCondition: "None"
-        },
-        {
-            name: "Liam Smith",
-            birthWeight: "3.5 kg",
-            sex: "Male",
-            birthday: "2023-07-15",
-            age: "3",
-            ageOfGestation: "40 weeks",
-            medicalCondition: "Mild jaundice"
-        },
-        {
-            name: "",
-            birthWeight: "",
-            sex: "",
-            birthday: "",
-            age: "",
-            ageOfGestation: "",
-            medicalCondition: ""
-        },
-    ]
-
+    
     const addChildren = (length: number) => {
+
         const newChild =  {
             name: "",
             birthWeight: "",
@@ -82,14 +87,18 @@ export const useScreeningForm = ({userType = "", }: ScreeningFormProps) => {
     }
 
     const handleUpdatePersonalInformation = (name: keyof ScreeningFormType, value: string) => {
-  
-        if(name === "contactNumber" && /[^0-9]/.test(value))return
-        if(name === "fullName" && /[^A-Za-z. ]/.test(value))return
+        // Validate contactNumber and fullName
+        if (name === "contactNumber" && /[^0-9]/.test(value)) return;
+        if (name === "fullName" && /[^A-Za-z. ]/.test(value)) return;
+        
+        console.log("name: ", name)
+        console.log("value: ", value)
+    
         setData({
             ...data,
             [name]: value
-        })
-    }
+        });
+    };
 
     const uncapitalizedString = (city: string) => {
         const trimmedString = city.trim();
@@ -98,27 +107,27 @@ export const useScreeningForm = ({userType = "", }: ScreeningFormProps) => {
       }
 
     const formatCity = (city: string) => {
-        console.log("city: ", city)
         const cityArray = city.toLowerCase().split("of")
-        console.log("array: ", cityArray)
        const result = city.toLowerCase().includes("of") ? cityArray[1] + " " + cityArray[0] : city
-       console.log("result: ", uncapitalizedString(result))
-       return uncapitalizedString(result)
+       const formattedCity = uncapitalizedString(result)
+       return formattedCity
     }
 
     const handleUpdateAddress = (name: keyof ScreeningFormType, value: {name: string}) => {
         if(name === "Municipality"){
-            formatCity(value.name)
+           const city = formatCity(value.name)
+           console.log("city: ", city)
             setData({
                 ...data,
-                [name]: value.name,
+                [name]:  city,
                 barangay: "" // reset barangay
             })
-            return
+            return 
         }
+        const barangay = formatCity(value.name)
         setData({
             ...data,
-            [name]: value.name
+            [name]: barangay
         })
     }
 
@@ -206,30 +215,65 @@ export const useScreeningForm = ({userType = "", }: ScreeningFormProps) => {
             else setValidMotherAge(true)
     }
 
-    const keysOfForm = [
-        'Applicant_ID',
-        'userType',
-        'fullName',
-        'Municipality',
-        'barangay',
-        'Age',
-        'birthDate',
-        'email',
-        'contactNumber',
-        'homeAddress',
-        'sex',
-        'childName',
-        'childAge',
-        'childBirthDate',
-        'birthWeight',
-        'RFR',
-    ]
+    const updateYesOrNo = (name: keyof ScreeningFormTypePage2, value: "Yes" | "No" | '') => {
 
-    // useEffect(() => {
-    //     console.log("updated data: ", JSON.stringify(data, null, 2))
-    // },[data])
+        const updatedData: Partial<ScreeningFormType> = {
+            [name]: value
+        }
+        if ((name === "MH2" || name === "MH8" || name === "MH14") && value === "No") {
+            console.log("rendereedd")
+            console.log(" updatedData[`${name}_Reason`]: ",  updatedData[`${name}_Reason`])
+            updatedData[`${name}_Reason`] = "";
+        }
+
+        setData({
+            ...data,
+            ...updatedData
+        })
+
+    }
+
+
+    const formChecker = (
+        screeningFormData: ScreeningFormType 
+    ): boolean => {
+        // Check if each key in keysToCheck exists in screeningFormData and is a string
+        const keysToCheck = 
+        userType === "Donor" && pageNumber === 1 ? DonorScreeningFormPage1keysTocheck 
+        :  userType === "Requestor" && pageNumber === 1 ? RequestorScreeningFormPage1keysTocheck
+        :  userType === "Donor" && pageNumber === 2 ? DonorScreeningFormPage2keysTocheck
+        : userType === "Donor" && pageNumber === 3 ? DonorScreeningFormPage3keysTocheck
+        : userType === "Donor" && pageNumber === 4 ? DonorScreeningFormPage4keysTocheck
+        : undefined
+        
+        if(!keysToCheck) return false
+        const isFormDataValid = keysToCheck.every(key => {
+            console.log("key: ", key)
+            const value = screeningFormData[key];
+            console.log("value: ", value)
+            if(key === "MH2_Reason" || key === "MH8_Reason" || key === "MH14_Reason") {
+                const newKey = key.split('_')[0] as 'MH2' | 'MH8' | 'MH14';
+                const value1 = screeningFormData[newKey]
+                const value2 = screeningFormData[key]
+                if(value1 === "Yes" && value2 === "") return false
+                else return true
+            }
+            return typeof value === 'string' && value.trim() !== '';
+        });
+        console.log("valid: ", isFormDataValid)
+    
+        return isFormDataValid
+    };
+    
 
     useEffect(() => {
+        console.log("updated data: ", JSON.stringify(data, null, 2))
+        setValidForm(formChecker(data))
+    },[data])
+
+    useEffect(() => {
+        const {numberOfBabies} = data
+        if(numberOfBabies === "") return
         addChildren(parseInt(data.numberOfBabies))
     },[data.numberOfBabies])
 
@@ -243,7 +287,9 @@ export const useScreeningForm = ({userType = "", }: ScreeningFormProps) => {
     },[ data.Age, validMotherAge, data.childrenInformation])
 
     useEffect(() => {
+
         const { barangay, Municipality} = data
+        if(barangay === "" && Municipality === "") return
         if(barangay !== "" && Municipality !== ""){
             setData({
                 ...data,
@@ -267,9 +313,10 @@ export const useScreeningForm = ({userType = "", }: ScreeningFormProps) => {
         handleUpdateAddress,
         updateMotherBirthday,
         updateInfantBirthday,
-        keysOfForm,
+        validForm,
         validMotherAge,
         validChildAge,
-        addChildren
+        addChildren,
+        updateYesOrNo,
     }
 }

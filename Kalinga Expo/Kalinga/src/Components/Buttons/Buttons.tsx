@@ -59,7 +59,7 @@ export const MenuButtonCard: React.FC<MenuButtonCardProp> = ({
             />
             <Text style={{
                 textAlign: "center",
-                fontFamily: "Open-Sans-Bold",
+                fontFamily: "Open-Sans-Condensed-Bold",
                 fontSize: 14,
                 color:"#E60965",
             }}>
@@ -92,7 +92,7 @@ interface CustomButtonProps {
 export const CustomButton: React.FC<CustomButtonProps> = ({
     text, 
     textColor, 
-    disabled, 
+    disabled = false, 
     navigation, 
     navigateTo, 
     params, 
@@ -101,7 +101,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 }) => {
     return(
         <TouchableOpacity
-        disabled={disabled ?? false}
+        disabled={disabled}
         onPress={() => navigatePage(navigation, navigateTo, params)}
         style={{
             alignSelf: "center",
@@ -111,7 +111,9 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
             justifyContent: "center",
             width: width * .25,
             borderRadius: 7,
-            elevation: elevation
+            elevation: elevation,
+            marginTop: "10%",
+            opacity: disabled ? 0.5 : 1
         }}
         >
             <Text

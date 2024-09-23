@@ -1,3 +1,4 @@
+import { DonorPersonalInformationFormKeys, DonorScreeningPage2FormKeys, DonorScreeningPage3FormKeys, DonorScreeningPage4FormKeys, PersonalInformationKeysToCheck, questionTypes, RequestorPersonalInformationFormKeys, Requirements, ScreeningFormTypePage2 } from "./props";
 
 export const message = {
     statusbar: "Discover the power of breastmilk for your baby's health and well-being."
@@ -71,3 +72,208 @@ export const babyOptions = [
   { label: 'Quadruplets', value: '4' },
   { label: 'Quintuplets', value: '5' },
 ];
+
+export const buttonRequestorData: Array<Requirements["Requestor"]> = [
+  "Clinical History",
+  "Presenting Complaint",
+  "Clinical Findings",
+  "Diagnosis",
+  "Treatments and Interventions",
+  "Prescription",
+  "Government ID",
+];
+
+export const DonorScreeningFormPage1keysTocheck: Array<PersonalInformationKeysToCheck["Donor"]> = [
+  "Applicant_ID",
+  "userType",
+  "fullName",
+  "Municipality",
+  "barangay",
+  "Age",
+  "birthDate",
+  "email",
+  "contactNumber",
+  "homeAddress",
+]
+
+export const RequestorScreeningFormPage1keysTocheck: Array<PersonalInformationKeysToCheck["Requestor"]> = [
+  "Applicant_ID",
+  "userType",
+  "fullName",
+  "Municipality",
+  "barangay",
+  "Age",
+  "birthDate",
+  "email",
+  "contactNumber",
+  "homeAddress",
+  "numberOfBabies"
+]
+
+export const DonorScreeningFormPage2keysTocheck: Array<DonorScreeningPage2FormKeys> = [
+  "QA",
+  "QB",
+  "Q1",
+  "Q2"
+]
+
+export const DonorScreeningFormPage3keysTocheck: Array<DonorScreeningPage3FormKeys> = [
+  "MH1",
+  "MH2",
+  "MH2_Reason",
+  "MH3",
+  "MH4",
+  "MH5",
+  "MH6",
+  "MH7",
+  "MH8",
+  "MH8_Reason",
+  "MH9",
+  "MH10",
+  "MH11",
+  "MH12",
+]
+
+export const DonorScreeningFormPage4keysTocheck: Array<DonorScreeningPage4FormKeys> = [
+   "MH13",
+   "MH14",
+   "MH14_Reason",
+   "MH15",
+   "SH1",
+   "SH2",
+]
+
+
+
+
+export const buttonDonorData: Array<Requirements["Donor"]> = [
+  "Hepa B",
+  "HIV",
+  "Syphillis",
+  "Pregnancy Booklet",
+  "Government ID",
+];
+
+
+export const BigTextInputQuestions: Array<{
+  questionId: keyof ScreeningFormTypePage2;
+  question: string;
+}> = [ 
+      { 
+        questionId: "QA",
+        question: "Bakit mo gusto mag bigay ng iyong gatas/breastmilk?", 
+      }, 
+      { 
+        questionId: "QB",
+        question: "Paano mo nalaman ang tungkol sa BreastMilk Bank ng Quezon City General Hospital?",
+      }, 
+]
+
+
+
+export const YesOrNoQuestions: Array<questionTypes> = [
+  { 
+      questionId: "Q1",
+      question:  "Gusto mo bang magbigay ng gatas nang regular sa loob ng anim na buwan?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "Q2",
+      question:  "Papayagan ka ba ng iyong asawa na magbigay ng iyong gatas sa Human Milk Bank?",
+      followUpQuestion: false,
+  }, 
+]
+
+export const MedicalHistoryQuestionsForDonor: Array<questionTypes> = [
+  { 
+      questionId: "MH1",
+      question:  "Nakapagbigay ka na ba ng iyong gatas dati?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "MH2",
+      question:  "Ikaw ba ay natanggihan na magbigay ng iyong gatas/breastmilk? Kung oo, sa anong dahilan?",
+      followUpQuestion: true,
+  }, 
+  { 
+      questionId: "MH3",
+      question:  "Normal ba ang panganganak mo sa huli mong anak?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "MH4",
+      question:  "Nagkaroon ka ba ng impeksiyon o sakit?",
+      followUpQuestion: false,
+  },
+  { 
+      questionId: "MH5",
+      question:  "Nagkaroon ka ba ng TB o sakit sa atay?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "MH6",
+      question:  "Ikaw ba ay nasalinan ng dugo nitong nakaaran na 12 na buwan?",
+      followUpQuestion: false,
+  },
+  { 
+      questionId: "MH7",
+      question:  "Ikaw ba ay naging recipient ng organ o tissue mula sa ibang tao nitong nakaraang 12 na buwan?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "MH8",
+      question:  "Nakainom ka ba ng alak nitong nakaraang 24 oras? Kung oo, gaano karami?",
+      followUpQuestion: true,
+  },
+  { 
+      questionId: "MH9",
+      question:  "Regular ka bang gumagamit ng mga gamot gaya ng replacement/birth control hormones o pills?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "MH10",
+      question:  "Gumagamit ka ba ng mga “megadose vitamins” o mga “herbal drugs”? ",
+      followUpQuestion: false,
+  },
+  { 
+      questionId: "MH11",
+      question:  "Ikaw ba ay hindi kumakain ng karne o isang “vegetarian”?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "MH12",
+      question:  "Kung oo, umiinom ka ba ng multivitamins?",
+      followUpQuestion: false,
+  },
+  { 
+      questionId: "MH13",
+      question:  "Gumagamit ka ba ng bawal na gamot?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "MH14",
+      question:  "Ikaw ba ay naninigarilyo? If yes, how many sticks or packs per day?",
+      followUpQuestion: true,
+  },
+  { 
+      questionId: "MH15",
+      question:  "Ikaw ba ay naoperahan na sa suso at nalagyan ng “silicone” or “artificial breast implants”?", 
+      followUpQuestion: false,
+  }, 
+
+  
+]
+
+
+export const SexualHistoryQuestion: Array<questionTypes> = [
+  { 
+      questionId: "SH1",
+      question:  "Nagkaroon ka na ba ng mga sakit na nakukuha sa pakikipagtalik/sex?", 
+      followUpQuestion: false,
+  }, 
+  {
+      questionId: "SH2",
+      question:  "Nagkaroon ka na ba ng karanasang makipagtalik sa higit pa sa isang lalaki?",
+      followUpQuestion: false,
+  }, 
+]

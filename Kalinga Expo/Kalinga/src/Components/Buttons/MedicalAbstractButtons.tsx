@@ -12,7 +12,7 @@ import { Requirements } from "@/data/props";
 
 const {width, height} = Dimensions.get('screen')
 interface MedicalAbstractButtonProps {
-    title: Requirements["Requestor"];
+    title: Requirements["Requestor" | "Donor"];
     uploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor" | "Donor"]) => void;
     uploadFile: (requirementType: Requirements["Requestor" | "Donor"]) => void;
 }
@@ -81,8 +81,8 @@ export const MedicalAbstractButton: React.FC<MedicalAbstractButtonProps> = ({
 interface UploadImageModal{
     visible: boolean;
     onClose: () => void;
-    onUploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor"]) => void;
-    title: Requirements["Requestor"]
+    onUploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor" | "Donor"]) => void;
+    title: Requirements["Requestor" | "Donor"]
 }
 
 export const UploadImageModal: React.FC<UploadImageModal> = ({
