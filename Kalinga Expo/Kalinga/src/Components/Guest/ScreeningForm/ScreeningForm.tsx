@@ -192,7 +192,7 @@ export const ScreeningForm: React.FC<ScreeningFormProps> = ({
             )}
 
                 <CustomButton
-                    disabled={validForm === false} 
+                    // disabled={validForm === false} 
                     text="Next"
                     navigation={navigation}
                     navigateTo={userType === "Requestor" ? 'ApplyAsRequestorPage2' : 'ApplyAsDonorPage2'}
