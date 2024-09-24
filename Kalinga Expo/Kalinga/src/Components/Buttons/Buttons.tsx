@@ -125,11 +125,3 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
         </TouchableOpacity>
     )
 }
-
-export const SubmitButton: React.FC = () => {
-    return(
-        <TouchableOpacity>
-            <Text>Submit</Text>
-        </TouchableOpacity>
-    )
-}

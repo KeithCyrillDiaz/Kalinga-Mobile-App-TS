@@ -1,10 +1,14 @@
+import { View, Text, TouchableOpacity} from "react-native";
+import React, {useState} from "react";
 import { MedicalAbstractButton } from "@/Components/Buttons/MedicalAbstractButtons";
 import { Requirements } from "@/data/props";
 import { useImagePickerHook } from "@/hooks/ImageAndDocumentPickerHooks";
 import { kalingaColor } from "@/styles/styles";
-import { textStyles } from "@/styles/styleSheet";
-import React from "react";
-import { View, Text} from "react-native";
+import { buttonStyles, textStyles } from "@/styles/styleSheet";
+
+import { firebaseAuthentication } from "@/functions/fireBase";
+import { LoadingBar } from "@/Components/loadingBar";
+
 
 interface MedicalRequirementsProps {
     uploadImage: (value: "Gallery" | "Camera", requirementType: Requirements["Requestor" | "Donor"]) => void;
@@ -18,6 +22,9 @@ export const MedicalRequirements: React.FC<MedicalRequirementsProps> = ({
     buttonData,
     userType
 }) => {
+
+    const [uploadingPercentage, setLoadingPercentage] = useState<number>(0)
+
 
     if(buttonData.length)
     return(
@@ -40,6 +47,23 @@ export const MedicalRequirements: React.FC<MedicalRequirementsProps> = ({
              uploadFile={uploadFile} 
              />
            ))}
+
+           <SubmitButton/>
+           {/* <LoadingBar progressNum={50} fileType="files" visible={true}/> */}
         </>
+    )
+}
+
+
+const SubmitButton: React.FC = () => {
+    return(
+        <TouchableOpacity
+        onPress={() => firebaseAuthentication()}
+        style={buttonStyles.default}
+        >
+            <Text 
+            style={{color: "white"}}
+            >Submit</Text>
+        </TouchableOpacity>
     )
 }
