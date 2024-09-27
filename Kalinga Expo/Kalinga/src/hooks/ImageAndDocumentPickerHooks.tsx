@@ -36,7 +36,7 @@ export const useImagePickerHook = () => {
                 mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 allowsEditing: false,
                 quality: 1,
-                allowsMultipleSelection: true, 
+                // allowsMultipleSelection: true, 
             });
 
             return result
@@ -107,13 +107,13 @@ export const useImagePickerHook = () => {
         }
 
 
-        useEffect(() => {
-            console.log("uploadedImages: ", JSON.stringify(images, null, 2))
-        }, [images])
+        // useEffect(() => {
+        //     console.log("uploadedImages: ", JSON.stringify(images, null, 2))
+        // }, [images])
 
-        useEffect(() => {
-            console.log("uploadedFiles: ", JSON.stringify(files, null, 2))
-        }, [files])
+        // useEffect(() => {
+        //     console.log("uploadedFiles: ", JSON.stringify(files, null, 2))
+        // }, [files])
 
     return {
         images,

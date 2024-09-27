@@ -7,6 +7,7 @@ type PageProps<T extends keyof RootStackParams> = StackScreenProps<RootStackPara
 export type DataPrivacyProps = PageProps<'DataPrivacyPage'>;
 export type ApplyAsRequestorProps = PageProps<'ApplyAsRequestorPage'>;
 export type ApplyAsRequestorPage2Props = PageProps<'ApplyAsRequestorPage2'>;
+export type ApplyAsRequestorPage3Props = PageProps<'ApplyAsRequestorPage3'>;
 export type ApplyAsDonorProps = PageProps<'ApplyAsDonorPage'>;
 export type ApplyAsDonorPage2Props = PageProps<'ApplyAsDonorPage2'>;
 export type ApplyAsDonorPage3Props = PageProps<'ApplyAsDonorPage3'>

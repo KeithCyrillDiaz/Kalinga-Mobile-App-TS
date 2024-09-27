@@ -17,16 +17,26 @@ import {
   ApplyAsDonorPage2,
   ApplyAsDonorPage3,
   ApplyAsDonorPage4,
-  ApplyAsDonorPage5
+  ApplyAsDonorPage5,
+  ApplyAsRequestorPage3
   
 } from '@/Pages'
-import { ScreeningFormType } from '@/data/props';
+import { ScreeningFormType, SelectedFiles, SelectedImages } from '@/data/props';
 
 
 type UserTypeParam = { userType: string };
 
 // Define a reusable type for pages that require userType and data
 type UserWithFormDataParam = { userType: string; data: ScreeningFormType };
+
+type userWithFormAndUploadsDataParam = {
+  userType: 'Donor' | 'Requestor',
+  data: ScreeningFormType,
+  uploads: {
+    images: SelectedImages;
+    files: SelectedFiles;
+  }
+}
 
 export type RootStackParams = {
   SplashScreen: undefined;
@@ -35,8 +45,11 @@ export type RootStackParams = {
   GuestHomePage: undefined;
   DataPrivacyPage: UserTypeParam;
   MilkBankLocatorPage: undefined;
+
   ApplyAsRequestorPage: UserTypeParam;
   ApplyAsRequestorPage2: UserWithFormDataParam;
+  ApplyAsRequestorPage3: userWithFormAndUploadsDataParam;
+
   ApplyAsDonorPage: UserTypeParam
   ApplyAsDonorPage2: UserWithFormDataParam;
   ApplyAsDonorPage3: UserWithFormDataParam;
@@ -71,6 +84,7 @@ export default function App() {
         {/* ScreeningForms */}
         <Stack.Screen name='ApplyAsRequestorPage' component={ApplyAsRequestorPage}/>
         <Stack.Screen name='ApplyAsRequestorPage2' component={ApplyAsRequestorPage2}/>
+        <Stack.Screen name='ApplyAsRequestorPage3' component={ApplyAsRequestorPage3}/>
         
         <Stack.Screen name='ApplyAsDonorPage' component={ApplyAsDonorPage}/>
         <Stack.Screen name='ApplyAsDonorPage2' component={ApplyAsDonorPage2}/>

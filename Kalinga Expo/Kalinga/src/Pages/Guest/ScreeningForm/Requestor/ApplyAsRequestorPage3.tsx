@@ -1,7 +1,6 @@
-import { CustomButton, KalingaStatusBar, PageIndicator } from "@/Components";
+import { CustomButton, KalingaStatusBar, PageIndicator, RFRComponent } from "@/Components";
 import { ImagesContainer } from "@/Components/Guest/ScreeningForm/ImagesContainer";
-import { ScreeningFormPage2 } from "@/Components/Guest/ScreeningForm/ScreeningFormPage2";
-import { ApplyAsRequestorPage2Props } from "@/data/props";
+import { ApplyAsRequestorPage3Props } from "@/data/props";
 import { RootStackParams } from "@@/App";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -11,13 +10,17 @@ import { FilesContainer } from "@/Components/Guest/ScreeningForm/filesContainer"
 import { MedicalRequirements } from "@/Components/Guest";
 import { buttonRequestorData } from "@/data/devData";
 import { kalingaColor } from "@/styles/styles";
+import { useScreeningForm } from "@/hooks";
+import { SubmitFormButton } from "@/Components/Buttons/Buttons";
 
 
-export default function ApplyAsRequestorPage2 ({route}:  ApplyAsRequestorPage2Props) {
+export default function ApplyAsRequestorPage3 ({route}:  ApplyAsRequestorPage3Props) {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>()
     const {data, userType} = route.params
-    const {images, files,  uploadImage, uploadFile} =useImagePickerHook()
+    const {images, files} = route.params.uploads
+
+    const {} = useScreeningForm({userType: userType})
 
     console.log("Requestor Page 2: ", JSON.stringify(data, null, 2))
     return(
@@ -25,7 +28,7 @@ export default function ApplyAsRequestorPage2 ({route}:  ApplyAsRequestorPage2Pr
             <KalingaStatusBar
             title = {`Apply as ${userType}`} 
             navigation={navigation}
-            back="ApplyAsRequestorPage"
+            back="ApplyAsRequestorPage2"
             home = {false} 
             backButton={true}
             params={{userType: "Requestor"}}
@@ -35,33 +38,21 @@ export default function ApplyAsRequestorPage2 ({route}:  ApplyAsRequestorPage2Pr
                 
                 <View style={{marginTop: 100}}/> 
                 {/* for spacing */}
-                <PageIndicator pageNumber={3} currentPageNumber={2}/>
-                <MedicalRequirements 
-                buttonData={buttonRequestorData} 
-                uploadImage={uploadImage} 
-                uploadFile={uploadFile}
-                userType="Requestor"
-                />
+                <PageIndicator pageNumber={3} currentPageNumber={3}/>
+                <RFRComponent savedData={data} userType={userType}/>
                 <ImagesContainer images = {images}/>
                 <FilesContainer files = {files}/>
 
-                <CustomButton
-                text="Next"
-                navigateTo="ApplyAsRequestorPage3"
-                navigation={navigation}
-                color={kalingaColor.text}
-                textColor="white"
-                elevation={7}
-                params={{userType: "Requestor", data: data, uploads: {files: files, images: images}}}
-                />
-
+                <SubmitFormButton/>
 
                  {/* for spacing */}
                 <View style={{marginBottom: 70}}/> 
+               
             </ScrollView>
-            
+        
         </>
        
         
     )
 }
+

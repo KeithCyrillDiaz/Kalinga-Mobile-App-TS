@@ -6,7 +6,7 @@ import { MenuButtonCard, CustomButton } from "./Buttons/Buttons";
 import { MapContainer } from "./MilkBankLocatorComponents";
 import { DataPrivacyAct } from "./dataPrivacyComponent";
 import { PageIndicator } from "./PageIndicator";
-import { LongTextInput, DoubleTextInput, BirthdayAndAgeComponent } from "./TextInputs";
+import { LongTextInput, DoubleTextInput, BirthdayAndAgeComponent, RFRComponent } from "./TextInputs";
 
 export {
     KalingaStatusBar,
@@ -22,5 +22,6 @@ export {
     PageIndicator,
     LongTextInput, 
     DoubleTextInput, 
-    BirthdayAndAgeComponent
+    BirthdayAndAgeComponent,
+    RFRComponent
 }

@@ -320,10 +320,8 @@ interface AddressDropDownsProps {
 }
 export const AddressDropDowns: React.FC<AddressDropDownsProps> = ({
     handleUpdateAddress,
-    data,
 }) => {
-    console.log("data: ", data)
-   
+
     const {
         provinces, 
         cities, 
@@ -460,5 +458,47 @@ export const AddressDropDowns: React.FC<AddressDropDownsProps> = ({
             />
         </>
        
+    )
+}
+
+interface RFRComponentProps {
+    userType: "Donor" | "Requestor";
+    savedData: ScreeningFormType
+}
+
+export const RFRComponent: React.FC<RFRComponentProps> = ({
+    userType,
+    savedData,
+}) => {
+     const {data, handleUpdatePersonalInformation} = useScreeningForm({userType: userType, savedData: savedData})
+    
+     return(
+        <View style={{
+            marginTop: 17,
+            gap: 17,
+            marginHorizontal: 17,
+        }}>
+            <Text style={{
+                color: kalingaColor.text,
+                fontFamily: "Open-Sans-Condensed-Bold",
+                fontSize: 17
+            }}>Reason for Requesting</Text>
+            <View style={{
+                marginHorizontal: 7,
+                padding: 17,
+                borderRadius: 22,
+                minHeight: 200,
+                backgroundColor: "white",
+                elevation: 7,
+                maxHeight: 250,
+            }}>
+                <TextInput
+                    onChangeText={(text) => handleUpdatePersonalInformation("RFR", text)}
+                    multiline
+                    value={data.RFR}
+                />
+            </View>
+            
+        </View>
     )
 }

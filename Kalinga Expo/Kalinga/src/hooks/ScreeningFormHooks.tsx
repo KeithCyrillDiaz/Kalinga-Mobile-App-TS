@@ -11,7 +11,7 @@ import randomatic from 'randomatic';
 interface ScreeningFormProps {
     userType?: string;
     savedData?: ScreeningFormType | undefined
-    pageNumber: 1 | 2 | 3 | 4
+    pageNumber?: 1 | 2 | 3 | 4
 }
 
 export const useScreeningForm = ({
@@ -90,9 +90,6 @@ export const useScreeningForm = ({
         // Validate contactNumber and fullName
         if (name === "contactNumber" && /[^0-9]/.test(value)) return;
         if (name === "fullName" && /[^A-Za-z. ]/.test(value)) return;
-        
-        console.log("name: ", name)
-        console.log("value: ", value)
     
         setData({
             ...data,
@@ -116,7 +113,6 @@ export const useScreeningForm = ({
     const handleUpdateAddress = (name: keyof ScreeningFormType, value: {name: string}) => {
         if(name === "Municipality"){
            const city = formatCity(value.name)
-           console.log("city: ", city)
             setData({
                 ...data,
                 [name]:  city,
@@ -221,8 +217,6 @@ export const useScreeningForm = ({
             [name]: value
         }
         if ((name === "MH2" || name === "MH8" || name === "MH14") && value === "No") {
-            console.log("rendereedd")
-            console.log(" updatedData[`${name}_Reason`]: ",  updatedData[`${name}_Reason`])
             updatedData[`${name}_Reason`] = "";
         }
 
@@ -240,17 +234,15 @@ export const useScreeningForm = ({
         // Check if each key in keysToCheck exists in screeningFormData and is a string
         const keysToCheck = 
         userType === "Donor" && pageNumber === 1 ? DonorScreeningFormPage1keysTocheck 
-        :  userType === "Requestor" && pageNumber === 1 ? RequestorScreeningFormPage1keysTocheck
-        :  userType === "Donor" && pageNumber === 2 ? DonorScreeningFormPage2keysTocheck
+        : userType === "Requestor" && pageNumber === 1 ? RequestorScreeningFormPage1keysTocheck
+        : userType === "Donor" && pageNumber === 2 ? DonorScreeningFormPage2keysTocheck
         : userType === "Donor" && pageNumber === 3 ? DonorScreeningFormPage3keysTocheck
         : userType === "Donor" && pageNumber === 4 ? DonorScreeningFormPage4keysTocheck
         : undefined
         
         if(!keysToCheck) return false
         const isFormDataValid = keysToCheck.every(key => {
-            console.log("key: ", key)
             const value = screeningFormData[key];
-            console.log("value: ", value)
             if(key === "MH2_Reason" || key === "MH8_Reason" || key === "MH14_Reason") {
                 const newKey = key.split('_')[0] as 'MH2' | 'MH8' | 'MH14';
                 const value1 = screeningFormData[newKey]
@@ -260,7 +252,6 @@ export const useScreeningForm = ({
             }
             return typeof value === 'string' && value.trim() !== '';
         });
-        console.log("valid: ", isFormDataValid)
     
         return isFormDataValid
     };
