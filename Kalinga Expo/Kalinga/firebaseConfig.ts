@@ -1,30 +1,26 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp } from "firebase/app"
-import { getAuth, browserLocalPersistence, setPersistence } from "firebase/auth";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+
+// const reactNativePersistence = (firebaseAuth as any).getReactNativePersistence;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDtCkbfOzId28gjuDhnIjpup2zrMFelkMU",
-  authDomain: "kalinga-ts.firebaseapp.com",
-  projectId: "kalinga-ts",
-  storageBucket: "kalinga-ts.appspot.com",
-  messagingSenderId: "564944131726",
-  appId: "1:564944131726:web:3954f8417a15b50b141bdf",
-  measurementId: "G-65RCSDVKHE"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
 export const fireBaseApp = initializeApp(firebaseConfig);
     console.log('Firebase app is initialized:', fireBaseApp.name);
 
-export const auth = getAuth(fireBaseApp);
+export const auth = initializeAuth(fireBaseApp, {
+  persistence: getReactNativePersistence(AsyncStorage) // getReactNativePersistence need custom declarations to bypass TS
+});
 
-// const setupAuthPersistence = async () => {
-//   try {
-//     await setPersistence(auth, browserLocalPersistence);
-//   } catch (error) {
-//     console.error("Error setting persistence:", error);
-//   }
-// };
-
-// // Call this function when initializing your app
-// setupAuthPersistence();
+export const storage = getStorage(fireBaseApp)

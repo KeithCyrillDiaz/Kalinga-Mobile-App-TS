@@ -5,11 +5,13 @@ import { ApplyAsDonorPage5Props, ApplyAsRequestorPage2Props } from "@/data/props
 import { RootStackParams } from "@@/App";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { ScrollView, View } from "react-native";
+import { ScrollView, TouchableOpacity, View, Text } from "react-native";
 import { useImagePickerHook } from "@/hooks/ImageAndDocumentPickerHooks";
 import { FilesContainer } from "@/Components/Guest/ScreeningForm/filesContainer";
 import { MedicalRequirements } from "@/Components/Guest";
 import { buttonDonorData, buttonRequestorData } from "@/data/devData";
+import { uploadImageOrFilesToFirebaseStorage } from "@/functions/fireBase";
+import { buttonStyles } from "@/styles/styleSheet";
 
 
 export default function ApplyAsDonorPage5 ({route}:  ApplyAsDonorPage5Props) {
@@ -24,7 +26,7 @@ export default function ApplyAsDonorPage5 ({route}:  ApplyAsDonorPage5Props) {
             <KalingaStatusBar
             title = {`Apply as ${userType}`} 
             navigation={navigation}
-            back="ApplyAsRequestorPage"
+            back="ApplyAsDonorPage4"
             home = {false} 
             backButton={true}
             params={{userType: "Requestor"}}
@@ -34,7 +36,7 @@ export default function ApplyAsDonorPage5 ({route}:  ApplyAsDonorPage5Props) {
                 
                 <View style={{marginTop: 100}}/> 
                 {/* for spacing */}
-                <PageIndicator pageNumber={3} currentPageNumber={2}/>
+                <PageIndicator pageNumber={5} currentPageNumber={5}/>
                 <MedicalRequirements 
                 buttonData={buttonDonorData} 
                 uploadImage={uploadImage} 
@@ -47,10 +49,30 @@ export default function ApplyAsDonorPage5 ({route}:  ApplyAsDonorPage5Props) {
                 <View style={{marginBottom: 70}}/> 
                
             </ScrollView>
-      
             {/* <CustomButton text="next" navigateTo="ApplyAsRequestorPage" */}
+           {/* <LoadingBar progressNum={50} fileType="files" visible={true}/> */}
+           
         </>
        
         
+    )
+}
+
+const SubmitButton: React.FC = () => {
+    return(
+        <TouchableOpacity
+        onPress={() => 
+            uploadImageOrFilesToFirebaseStorage({
+            uri: "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
+            userType: "Donor",
+            purpose: "Registration",
+            fileType: "Images"
+        })}
+        style={buttonStyles.default}
+        >
+            <Text 
+            style={{color: "white"}}
+            >Submit</Text>
+        </TouchableOpacity>
     )
 }

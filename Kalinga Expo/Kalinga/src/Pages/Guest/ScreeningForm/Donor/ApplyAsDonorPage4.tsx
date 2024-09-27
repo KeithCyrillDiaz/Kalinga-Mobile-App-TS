@@ -16,7 +16,7 @@ export default function ApplyAsDonorPage4 ({route}: ApplyAsDonorPage4Props) {
             <KalingaStatusBar
         title={`Apply as ${userType}`}
         navigation={navigation}
-        back="ApplyAsDonorPage2"
+        back="ApplyAsDonorPage3"
         home = {false} 
         backButton={true}
         params={{userType: "Donor"}}

@@ -9,6 +9,9 @@ import {
      User
     } from 'firebase/auth';
 
+import {ref, uploadBytesResumable, getDownloadURL,} from 'firebase/storage'
+import { storage } from '@@/firebaseConfig';
+
 export const firebaseAuthentication = async () => {
     console.log("auth: ", auth)
     const user = auth.currentUser
@@ -17,6 +20,64 @@ export const firebaseAuthentication = async () => {
     //     const result = await signInUserInFirebase({email: "diaz.valorantclips@gmail.com", password: "Test1234"})
     //     console.log("result: ", result)
     // }     
+}
+
+interface uploadImageOrFilesToFirebaseStorageParams {
+  uri: string;
+  purpose: 'Registration' | 'ProfilePicture' ;
+  userType: 'Donor' | 'Requestor';
+  fileType: 'Images' | 'Files'
+}
+
+export const uploadImageOrFilesToFirebaseStorage = ({
+  uri,
+  purpose,
+  userType,
+  fileType
+}: uploadImageOrFilesToFirebaseStorageParams) => {
+  return new Promise( async (resolve, reject) => {
+
+
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    console.log("blob: ", blob);
+    
+    const fileName =  + new Date().getTime();
+// "registration/Donor/Keith/Application/Images/" 
+    const path = purpose === 'Registration' ? `Registration/${userType}/Keith/${fileType}/${fileName}`
+    : purpose === 'ProfilePicture' ? `${userType}/Keith/${purpose}/${fileType}/${fileName}`
+    : undefined
+
+    if(!path) {
+      console.log("Error: Undefined Path");
+      return
+    }
+
+    const storageRef = ref(storage, path + new Date().getTime());
+    const uploadTask = uploadBytesResumable(storageRef, blob);
+
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("progress: ", progress.toFixed() + "%");
+      },
+      (error) => {
+        console.error('Upload failed:', error);
+      }, 
+      async () => {
+        try {
+          const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+          console.log("downloadURL: ", downloadUrl);
+          resolve(null);
+        } catch (error) {
+          console.error('fetching download URL failed:', error);
+          reject(error)
+        }
+      }
+    )
+
+  })
 }
 
 interface SignInParams {
