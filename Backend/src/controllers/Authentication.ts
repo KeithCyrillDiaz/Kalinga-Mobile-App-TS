@@ -1,5 +1,5 @@
 import express from 'express'
-import { getDonorByParameter, getDonors, getRequestor, getRequestorByParameter, registerDonor, registerRequestor } from '../models/Users'
+import { Donor, getDonorByParameter, getDonors, getRequestor, getRequestorByParameter, registerDonor, registerRequestor, Requestor } from '../models/Users'
 import { passEncryption, random } from '../helpers/Encryption'
 import { createToken } from '../models/Authentication'
 import jwt from 'jsonwebtoken'
@@ -26,7 +26,7 @@ export const registration = async (req: express.Request, res: express. Response)
         }
         
         console.log("newUser: ", newUser.authentication.password)
-        const result = userType === "Donor" ? await registerDonor(newUser) : await registerRequestor(newUser)
+        const result = userType === "Donor" ? await registerDonor(newUser as Donor) : await registerRequestor(newUser as Requestor)
         console.log("result: ", result)
 
         if(!result){
