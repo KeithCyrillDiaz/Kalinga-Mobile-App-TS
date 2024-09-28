@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { initializeApp } from "firebase/app"
 import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import { logWithColor } from "@/functions/consoleLog";
 
 // const reactNativePersistence = (firebaseAuth as any).getReactNativePersistence;
 
@@ -17,7 +18,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const fireBaseApp = initializeApp(firebaseConfig);
-    console.log('Firebase app is initialized:', fireBaseApp.name);
+
+    logWithColor({
+      messageType: 'Ready',
+      message: 'Firebase app is initialized: ' + fireBaseApp.name
+    })
 
 export const auth = initializeAuth(fireBaseApp, {
   persistence: getReactNativePersistence(AsyncStorage) // getReactNativePersistence need custom declarations to bypass TS

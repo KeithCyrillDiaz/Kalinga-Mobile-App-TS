@@ -9,8 +9,10 @@ import {
      User
     } from 'firebase/auth';
 
-import {ref, uploadBytesResumable, getDownloadURL,} from 'firebase/storage'
+import {ref, uploadBytesResumable, getDownloadURL, uploadBytes,} from 'firebase/storage'
 import { storage } from '@@/firebaseConfig';
+import { Requirements } from '@/data/props';
+import { uploadFilesOrImagesMetaDataToDatabase } from './upload';
 
 export const firebaseAuthentication = async () => {
     console.log("auth: ", auth)
@@ -26,14 +28,21 @@ interface uploadImageOrFilesToFirebaseStorageParams {
   uri: string;
   purpose: 'Registration' | 'ProfilePicture' ;
   userType: 'Donor' | 'Requestor';
-  fileType: 'Images' | 'Files'
+  fileType: 'Images' | 'Files';
+  ownerId: string;
+  ownerName: string;
+  requirementType: Requirements['Requestor' | 'Donor']
 }
 
 export const uploadImageOrFilesToFirebaseStorage = ({
   uri,
   purpose,
   userType,
-  fileType
+  fileType,
+  ownerId,
+  ownerName,
+  requirementType
+
 }: uploadImageOrFilesToFirebaseStorageParams) => {
   return new Promise( async (resolve, reject) => {
 
@@ -45,8 +54,8 @@ export const uploadImageOrFilesToFirebaseStorage = ({
     
     const fileName =  + new Date().getTime();
 // "registration/Donor/Keith/Application/Images/" 
-    const path = purpose === 'Registration' ? `Registration/${userType}/Keith/${fileType}/${fileName}`
-    : purpose === 'ProfilePicture' ? `${userType}/Keith/${purpose}/${fileType}/${fileName}`
+    const path = purpose === 'Registration' ? `Registration/${userType}/${ownerName}/${fileType}/${fileName}`
+    : purpose === 'ProfilePicture' ? `${userType}/${userType}/${purpose}/${fileType}/${fileName}`
     : undefined
 
     if(!path) {
@@ -69,6 +78,16 @@ export const uploadImageOrFilesToFirebaseStorage = ({
         try {
           const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
           console.log("downloadURL: ", downloadUrl);
+          if(downloadUrl){
+            await uploadFilesOrImagesMetaDataToDatabase({
+              uri,
+              purpose,
+              fileType,
+              ownerId,
+              ownerName,
+              requirementType
+            })
+          }
           resolve(null);
         } catch (error) {
           console.error('fetching download URL failed:', error);
